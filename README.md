@@ -18,6 +18,6 @@ Unlike sigarra, our product is much more accesible and easy to use.
 
 ### Assumptions and dependencies
 
-- Food menu from sigarra
+- Menu from sigarra
 - Establishment info from sigarra
 - Student number
