@@ -26,10 +26,10 @@ Please contact us!
 
 Thank you!
 
-Daniela Tomás - up202004946
-Mario Ferreira - up201907727
-Tiago Ribeiro - up
-Gabriel Carvalho - up201904508
-Diogo Nunes - up202007895
-
+Daniela Tomás - up202004946  
+Mario Ferreira - up201907727  
+Tiago Ribeiro - up  
+Gabriel Carvalho - up201904508  
+Diogo Nunes - up202007895  
+  
 ---
