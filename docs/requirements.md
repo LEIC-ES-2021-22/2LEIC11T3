@@ -1,7 +1,13 @@
 
 ## Requirements
 
-In this section, you should describe all kinds of requirements for your module: functional and non-functional requirements.
+R1.Users can view information about the food menus and establishments for the remaining days of the week.  
+R2.Users can rate and comment on a meal per mealtime.  
+R3.Users can remove previously submitted feedback  
+R4.Users can vote anonymously if they choose. 
+R5.The system must prevent vote fraud.  
+R6.Users can receive a recommendation based on their preferences and previous user feedback.  
+
 
 ### Use case model 
 
