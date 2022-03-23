@@ -1,23 +1,27 @@
-# 2LEIC11T3
-## Product Vision
+Food FEUP Development Report
 
-### Vision Statement
+Welcome to the documentation pages of the Food FEUP!
 
-Find out the best place to eat today @FEUP
+You can find here detailed about the product (or mini-app or module), from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by discipline (as of RUP):
 
-For students and staff, who want a good meal, the Food FEUP is an app that provides all you need to know to make your choice.
+Business modeling
+Product Vision
+[Elevator Pitch]
+Requirements
+Use Case Model
+User stories
+Domain model
+[Architecture and Design]
+[Logical architecture]
+[Physical architecture]
+[Prototype]
+[Implementation]
+[Test]
+[Configuration and change management]
+[Project management]
+So far, contributions are exclusively made by the initial team, but we hope to open them to the community, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
-Unlike sigarra, our product is much more accesible and easy to use.
+Please contact us!
 
-### Main Features
- - Display this week´s menu at the various establishments @FEUP
- - Pricing info and working hours for each establishment
- - Publicly visible feedback from users about each plate´s quality
- - Establishment suggestion system based on user feedback
- - Detect feedback abuse from malicious users
+Thank you!
 
-### Assumptions and dependencies
-
-- Menu from sigarra
-- Establishment info from sigarra
-- Student number
