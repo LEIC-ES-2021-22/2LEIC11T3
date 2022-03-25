@@ -1,11 +1,4 @@
-
-## Requirements
-
-- R1. Users can view information about the food menus and establishments for the remaining days of the week.  
-- R2. Users can rate and comment on a meal per mealtime.  
-- R3. Users can remove previously submitted feedback  
-- R4. Users can vote anonymously if they choose.  
-- R5. The system must prevent vote fraud.  
+ Leave a rating                                                                                                                                                                                                                                                                                                                     t vote fraud.  
 - R6. Users can receive a recommendation based on their preferences and previous user feedback.  
 
 
@@ -21,14 +14,14 @@ Example:
 </p>
 
 |||
-| --- | --- |
-| *Name* | Choose a meal |
-| *Actor* |  Authenticated User | 
-| *Description* | Allow the user to look through the menus, the user can search by establishments |
-| *Preconditions* | - The user wants information about the meal options at FEUP. |
-| *Postconditions* | - The user receives information about the content of the meal. |
-| *Normal flow* | 1. The user opens the application.<br> 2. The user clicks the establishments button.<br> 3.The user selects an establishment. <br> 4. The user selects 1 menu from the available.<br> 5. If wanted, the user can leave a rating and a comment.<br> 
-| *Alternative flows and exceptions* | 1. [Establishment closed] If, in step 3 the user selects an establishment that is closed the system displays an error and makes the user go back to step 3. |
+| --- |----------------- Choose a meal                                                                                                                                                                                    ------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *Name* | Choose a meal                                                                                                                                                                                    |
+| *Actor* | Authenticated User                                                                                                                                                                               | 
+| *Description* | Allow the user to look through the menus, the user can search by establishments                                                                                                                  |
+| *Preconditions* | - The user wants information about the meal options at FEUP.                                                                                                                                     |
+| *Postconditions* | - The user receives information about the content of the meal.                                                                                                                                   |
+| *Normal flow* | 1. The user opens the application.<br> 2.The user selects an establishment. <br> 3. The user selects 1 menu from the available.<br> 4. If wanted, the user can leave a rating and a comment.<br> 
+| *Alternative flows and exceptions* | 1. [Establishment closed] If, in step 2 the user selects an establishment that is closed the system displays an error and makes the user go back to step 2.                                      |
 
 |||
 | --- | --- |
@@ -39,6 +32,17 @@ Example:
 | *Postconditions* | - The user gets a menu from an establishment with the highest rating according to his choice. |
 | *Normal flow* | 1. The user opens the application.<br> 2. The user clicks the recommendation button.<br> 3.The user inputs his preference(meat,fish,etc.). <br> 4.The user receives a menu recommendation.<br>  5. If wanted, the user can leave a rating and a comment.  |
 | *Alternative flows and exceptions* | 1. [Everything closed] If, in step 2 of the normal flow all establishments are closed the user receives a warning message |
+
+
+|||
+| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+| *Name* | Get a recommendation |
+| *Actor* | Authenticated User |                                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+| *Description*  | The user The user can rate from 1 to 5 stars the meal selected.                                                                                                                                                                                                                                                  |     
+| *Preconditions* | - The user may want to give his opinion. |                                                                                                                                                                                                                                                                                                             
+| *Postconditions* | - After rating the meal, anyone can look it up.                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                   
+| *Normal flow* | 1. The user opens the application.<br>  2.The user selects an establishment. <br> 3. The user selects 1 menu from the available.<br> 4. The user leaves a rating.<br>                                                                                                                                           |                                                                                                                                                          
+| *Alternative flows and exceptions* | 1. [Leave a comment] After step 5 the user can comment on his experience. <br> 2.[Gets a recommendation] In step 2 the user can click the recommendation button then the user inputs his preference(meat,fish,etc.). After that the user receives a menu recommendation and if he wants, he can leave a rating. |                                                                                                                                       
 
 
 ### User stories
