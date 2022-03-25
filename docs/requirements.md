@@ -17,7 +17,7 @@ Give each use case a concise, results-oriented name. Use cases should reflect th
 
 Example:
  <p align="center" justify="center">
-  <img src="https://github.com/LEIC-ES-2021-22/templates/blob/main/images/UseCaseView.png"/>
+  <img src="https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/images/UseCaseView.png"/>
 </p>
 
 |||
