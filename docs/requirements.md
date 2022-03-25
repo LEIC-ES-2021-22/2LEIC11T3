@@ -14,14 +14,14 @@ Example:
 </p>
 
 |||
-| --- |----------------- Choose a meal                                                                                                                                                                                    ------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *Name* | Choose a meal                                                                                                                                                                                    |
-| *Actor* | Authenticated User                                                                                                                                                                               | 
-| *Description* | Allow the user to look through the menus, the user can search by establishments                                                                                                                  |
-| *Preconditions* | - The user wants information about the meal options at FEUP.                                                                                                                                     |
-| *Postconditions* | - The user receives information about the content of the meal.                                                                                                                                   |
-| *Normal flow* | 1. The user opens the application.<br> 2.The user selects an establishment. <br> 3. The user selects 1 menu from the available.<br> 4. If wanted, the user can leave a rating and a comment.<br> 
-| *Alternative flows and exceptions* | 1. [Establishment closed] If, in step 2 the user selects an establishment that is closed the system displays an error and makes the user go back to step 2.                                      |
+| --- | --- |
+| *Name* | Choose a meal |
+| *Actor* | Authenticated User | 
+| *Description* | Allow the user to look through the menus, the user can search by establishments |
+| *Preconditions* | - The user wants information about the meal options at FEUP. |
+| *Postconditions* | - The user receives information about the content of the meal. |
+| *Normal flow* | 1. The user opens the application.<br> 2.The user selects an establishment. <br> 3. The user selects 1 menu from the available.<br> 4. If wanted, the user can leave a rating and a comment.<br> |
+| *Alternative flows and exceptions* | 1. [Establishment closed] If, in step 2 the user selects an establishment that is closed the system displays an error and makes the user go back to step 2. |
 
 |||
 | --- | --- |
@@ -35,14 +35,14 @@ Example:
 
 
 |||
-| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-| *Name* | Get a recommendation |
-| *Actor* | Authenticated User |                                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-| *Description*  | The user The user can rate from 1 to 5 stars the meal selected.                                                                                                                                                                                                                                                  |     
-| *Preconditions* | - The user may want to give his opinion. |                                                                                                                                                                                                                                                                                                             
-| *Postconditions* | - After rating the meal, anyone can look it up.                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                   
-| *Normal flow* | 1. The user opens the application.<br>  2.The user selects an establishment. <br> 3. The user selects 1 menu from the available.<br> 4. The user leaves a rating.<br>                                                                                                                                           |                                                                                                                                                          
-| *Alternative flows and exceptions* | 1. [Leave a comment] After step 5 the user can comment on his experience. <br> 2.[Gets a recommendation] In step 2 the user can click the recommendation button then the user inputs his preference(meat,fish,etc.). After that the user receives a menu recommendation and if he wants, he can leave a rating. |                                                                                                                                       
+| --- | --- |
+| *Name* | Leave a Rating |
+| *Actor* | Authenticated User |
+| *Description* | Thue user can rate from 1 to 5 starts the meal. |
+| *Preconditions* | The user wants to give his opinion on the experience. |
+| *Postconditions* | After rating the meal, anyone can look it up. |
+| *Normal flow* | 1- The user opens the applications. <br> 2. The user selects an establishment. <br> 3. The user selects one menu from the available <br> 4. The user leaves a rating |
+| *Alternative flow and exceptions* | 1. [Leave a comment] After step 4, the user can comment on his experience. <br>  2. [Gets a Recommendation] In step 2, the user can click the recommendations button. Then the user inputs his preference. After that the user receives a menu recommendations and leaves a rating. |
 
 
 ### User stories
