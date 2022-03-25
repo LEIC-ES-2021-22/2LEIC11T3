@@ -17,13 +17,13 @@ Give each use case a concise, results-oriented name. Use cases should reflect th
 
 Example:
  <p align="center" justify="center">
-  <img src="https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/images/UseCaseView.png"/>
+  <img src="../images/UseCaseView.png">
 </p>
 
 |||
 | --- | --- |
 | *Name* | Choose a meal |
-| *Actor* |  User | 
+| *Actor* |  Authenticated User | 
 | *Description* | Allow the user to look through the menus, the user can search by establishments |
 | *Preconditions* | - The user wants information about the meal options at FEUP. |
 | *Postconditions* | - The user receives information about the content of the meal. |
@@ -33,7 +33,7 @@ Example:
 |||
 | --- | --- |
 | *Name* | Get a recommendation |
-| *Actor* |  User | 
+| *Actor* | Authenticated User | 
 | *Description* | The user gets recommended a meal considering his choice and other users feedback |
 | *Preconditions* | - The user wants the best possible option considering his preference |
 | *Postconditions* | - The user gets a menu from an establishment with the highest rating according to his choice. |
