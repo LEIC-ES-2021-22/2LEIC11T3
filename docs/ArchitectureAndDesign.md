@@ -1,14 +1,6 @@
 
 ## Architecture and Design
 
-The architecture of a software system encompasses the set of key decisions about its overall organization. 
-
-A well written architecture document is brief but reduces the amount of time it takes new programmers to a project to understand the code to feel able to make modifications and enhancements.
-
-To document the architecture requires describing the decomposition of the system in their parts (high-level components) and the key behaviors and collaborations between them. 
-
-In this section you should start by briefly describing the overall components of the project and their interrelations. You should also describe how you solved typical problems you may have encountered, pointing to well-known architectural and design patterns, if applicable.
-
 In this section it will be explained both logical and physical architectures of the project as some key aspects of its design.
 
 This project will use the Model-View-Controller design pattern, where the program is divided into three interconnected elements that focus on a functional GUI.
