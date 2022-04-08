@@ -1,5 +1,6 @@
 
 ## Architecture and Design
+
 The architecture of a software system encompasses the set of key decisions about its overall organization. 
 
 A well written architecture document is brief but reduces the amount of time it takes new programmers to a project to understand the code to feel able to make modifications and enhancements.
@@ -17,6 +18,7 @@ This project will use the Model-View-Controller design pattern, where the progra
      height="250" /> </p>
      
 ### Logical architecture
+
 The purpose of this subsection is to document the high-level logical structure of the code (Logical View), using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
 
 It can be beneficial to present the system both in a horizontal or vertical decomposition:
@@ -30,6 +32,7 @@ It can be beneficial to present the system both in a horizontal or vertical deco
 ![LogicalView](../images/LogicalView.png)
 
 ### Physical architecture
+
 Only two entities are present on FEUP Food's physical architecture: the app itself, that interacts with the user, and the server containing the database where the information is stored.
 
 Regarding the technologies used, the frontend will depend on Flutter (with the Dart programming language) and the backend on SQLite.
@@ -39,6 +42,7 @@ Regarding the technologies used, the frontend will depend on Flutter (with the D
 
 
 ### Vertical prototype
+
 To help on validating all the architectural, design and technological decisions made, we usually implement a vertical prototype, a thin vertical slice of the system.
 
 In this subsection please describe which feature you have implemented, and how, together with a snapshot of the user interface, if applicable.
