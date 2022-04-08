@@ -12,9 +12,9 @@ You can find here detailed about the product (or mini-app or module), from a hig
   * [User stories](https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/docs/requirements.md#User-stories)
   * [Domain model](https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/docs/requirements.md#Domain-model)
 * [Architecture and Design](https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/docs/ArchitectureAndDesign.md)
-  * [Logical architecture]
-  * [Physical architecture]
-  * [Prototype]
+  * [Logical architecture](https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/docs/ArchitectureAndDesign.md#Logical-architecture)
+  * [Physical architecture](https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/docs/ArchitectureAndDesign.md#Physical-architecture)
+  * [Prototype](https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/main/docs/ArchitectureAndDesign.md#Vertical-prototype)
 * [Implementation]
 * [Test]
 * [Configuration and change management]
