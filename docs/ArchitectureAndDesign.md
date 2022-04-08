@@ -23,9 +23,11 @@ It can be beneficial to present the system both in a horizontal or vertical deco
 * horizontal decomposition may define layers and implementation concepts, such as the user interface, business logic and concepts; 
 * vertical decomposition can define a hierarchy of subsystems that cover all layers of implementation.
 
-Example of _UML package diagram_ showing a _logical view_ of the Eletronic Ticketing System (to be accompanied by a short description of each package):
+* `Uni + FoodFEUP UI`: responsible for how the user will interact
+* `Uni + FoodFEUP Logic`: responsible for processing data
+* `Uni + FoodFEUP Database Schema`: saves user feedback
 
-![LogicalView](https://user-images.githubusercontent.com/9655877/160585416-b1278ad7-18d7-463c-b8c6-afa4f7ac7639.png)
+![LogicalView](../images/LogicalView.png)
 
 ### Physical architecture
 Only two entities are present on FEUP Food's physical architecture: the app itself, that interacts with the user, and the server containing the database where the information is stored.
