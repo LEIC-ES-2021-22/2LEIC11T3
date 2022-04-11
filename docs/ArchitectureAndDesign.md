@@ -17,7 +17,7 @@ To document the high-level logical structure of the code (Logical View), we use 
 * `Uni + FoodFEUP Logic`: responsible for control and processing data
 * `Uni + FoodFEUP Authentication`: user athentication (contains login, logout and register)
 * `Uni + FoodFEUP Database Schema`: stores data such as user feedback and sigarra informations
-* `Uni + FoodFEUP Sigarra Database Schema`: data from sigarra
+* `Sigarra Database Schema`: data from sigarra
 
 ![LogicalView](../images/LogicalView.png)
 
