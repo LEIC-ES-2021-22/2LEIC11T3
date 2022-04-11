@@ -11,12 +11,12 @@ This project will use the Model-View-Controller design pattern, where the progra
      
 ### Logical architecture
 
-The purpose of this subsection is to document the high-level logical structure of the code (Logical View), using a UML diagram with logical packages, without the worry of allocating to components, processes or machines.
+To document the high-level logical structure of the code (Logical View), we use a UML diagram with logical packages.
 
 * `Uni + FoodFEUP UI`: responsible for how the user will interact
 * `Uni + FoodFEUP Logic`: responsible for control and processing data
-* `Uni + FoodFEUP Authentication`: user athentication (login, logout, register)
-* `Uni + FoodFEUP Database Schema`: saves user feedback and sigarra informations
+* `Uni + FoodFEUP Authentication`: user athentication (contains login, logout and register)
+* `Uni + FoodFEUP Database Schema`: stores data such as user feedback and sigarra informations
 * `Uni + FoodFEUP Sigarra Database Schema`: data from sigarra
 
 ![LogicalView](../images/LogicalView.png)
