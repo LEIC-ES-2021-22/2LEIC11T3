@@ -33,8 +33,15 @@ Regarding the technologies used, the frontend will depend on Flutter (with the D
 
 ### Vertical prototype
 
-To help on validating all the architectural, design and technological decisions made, we usually implement a vertical prototype, a thin vertical slice of the system.
+<h4> Login </h4>
 
-In this subsection please describe which feature you have implemented, and how, together with a snapshot of the user interface, if applicable.
+<p align = "center"> <img src="../images/login_page.png" 
+     width="250" 
+     height="500" /> </p>
 
-At this phase, instead of a complete user story, you can simply implement a feature that demonstrates thay you can use the technology, for example, show a screen with the app credits (name and authors).
+We started by design the login page using moqups and then implementing a similar design using flutter widgets.
+The login page consists of a logo, two textformfields and a button.
+For this initial version the login button interacts with an SQLite database which we have previously configured
+
+In the next steps of the project we will implement login using SIGARRA credentials.
+When the login is sucessful the app opens another page that only contains a button to go back.
