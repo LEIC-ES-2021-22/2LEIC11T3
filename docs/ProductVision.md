@@ -7,7 +7,7 @@ Find out the best place to eat today @FEUP
 
 For students and staff, who want a good meal, Food FEUP is an app that provides all you need to know to make your choice.
 
-Unlike sigarra, our product is much more accesible and easy to use.
+Unlike sigarra, our product offers users the choice to rate and comment on the meals and receive recommendations based on user's preferences.
 
 ### Main Features
  - Display this week´s menu at the various establishments @FEUP
