@@ -3,7 +3,7 @@
 
 ### Vision Statement
 
-Find out the best place to eat today @FEUP
+Find out the best place to eat today @FEUP.
 
 For students and staff in search of the perfect meal, Food FEUP is an app that provides all you need to know to make your choice.
 
