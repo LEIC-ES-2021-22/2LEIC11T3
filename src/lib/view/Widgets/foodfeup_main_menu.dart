@@ -18,16 +18,11 @@ class FoodFeupMainMenuState extends State<FoodFeupMainMenu>{
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text("Food Feup"),
-      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: ListView(
             children: getWidgets(context),
           ),
@@ -44,51 +39,60 @@ bool decoy() {
 
 List<Widget> getWidgets(BuildContext context) {
   final List<Widget> widgets = [];
-
-  widgets.add(createLogo(context));
-  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16)));
-  widgets.add(createButton(context, 'Cantina', decoy));
-  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16)));
-  widgets.add(createButton(context, 'Restaurante', decoy));
+  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
+  widgets.add(createButton(context, 'Cantina', '11h30-14h00 / 18h30-20h30', Colors.red , decoy));
+  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
+  widgets.add(createButton(context, 'Grill', '12h00-14h00', Colors.red , decoy));
+  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
+  widgets.add(createButton(context, 'Cafetaria', '8h30-17h30', Colors.red , decoy));
+  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
+  widgets.add(createButton(context, 'Restaurante INEGI', '', Colors.red , decoy));
+  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
+  widgets.add(createButton(context, 'Bar INESC TEC', '', Colors.red , decoy));
+  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
+  widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , decoy));
 
   return widgets;
 }
 
-Widget createLogo(BuildContext context) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-    child: Center(
-      child: SizedBox(
-        width: 100,
-        height: 100,
-        child: Image.asset('Images/logo.png'),
-      ),
-    ),
-  );
-}
-
-Widget createButton(BuildContext context, String buttonName, Function action) {
+Widget createButton(BuildContext context, String buttonName, String timeTable, Color colour, Function action) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
     child: SizedBox(
-      height: 50,
+      height: 75,
       width: 250,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
-          primary: Colors.red,
+          primary: colour,
         ),
         onPressed: action,
 
-        child: Text(buttonName,
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-                fontSize: 20),
-            textAlign: TextAlign.center),
+        child: ListView(
+            children: generateButtonText(context, buttonName, timeTable),
+          ),
+        )
       ),
-    ),
   );
+}
+
+List<Widget> generateButtonText(BuildContext context, String buttonName, String timeTable) {
+  final List<Widget> widgets = [];
+  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 7)));
+  widgets.add(Text(buttonName,
+      style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
+          fontSize: 20),
+      textAlign: TextAlign.center));
+  widgets.add(Text(timeTable,
+      style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
+          fontSize: 14),
+      textAlign: TextAlign.center));
+
+  return widgets;
 }
