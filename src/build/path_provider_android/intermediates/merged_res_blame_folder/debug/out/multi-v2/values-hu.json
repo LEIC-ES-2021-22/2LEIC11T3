@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/diogo/Documents/foodFeupTrial/build/path_provider_android/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
+            "outputFile": "C:\\Users\\mpspm\\Desktop\\Feup-MIEIC\\3Ano-2S\\Es\\2LEIC11T3\\src\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\values-hu\\values-hu.xml",
             "map": [
                 {
-                    "source": "/home/diogo/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/res/values-hu/values-hu.xml",
+                    "source": "C:\\Users\\mpspm\\.gradle\\caches\\transforms-2\\files-2.1\\122df2e57d294d1a53db26bbc3b813c1\\core-1.6.0\\res\\values-hu\\values-hu.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "/home/diogo/Documents/foodFeupTrial/build/path_provider_android/intermediates/res/merged/debug/values-hu/values-hu.xml",
+            "outputFile": "C:\\Users\\mpspm\\Desktop\\Feup-MIEIC\\3Ano-2S\\Es\\2LEIC11T3\\src\\build\\path_provider_android\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hu\\values-hu.xml",
             "map": [
                 {
-                    "source": "/home/diogo/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/res/values-hu/values-hu.xml",
+                    "source": "C:\\Users\\mpspm\\.gradle\\caches\\transforms-2\\files-2.1\\122df2e57d294d1a53db26bbc3b813c1\\core-1.6.0\\res\\values-hu\\values-hu.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

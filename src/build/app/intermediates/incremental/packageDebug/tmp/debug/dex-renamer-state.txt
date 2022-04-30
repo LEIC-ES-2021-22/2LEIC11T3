@@ -1,4 +1,4 @@
-#Tue Apr 12 03:32:46 PDT 2022
-base.0=/home/diogo/Documents/foodFeupTrial/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Sat Apr 30 15:02:08 BST 2022
+base.0=C\:\\Users\\mpspm\\Desktop\\Feup-MIEIC\\3Ano-2S\\Es\\2LEIC11T3\\src\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
