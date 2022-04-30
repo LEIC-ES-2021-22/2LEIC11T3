@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "com.example.food_feup",
+  "applicationId": "pt.up.fe.ni.uni",
   "variantName": "debug",
   "elements": []
 }

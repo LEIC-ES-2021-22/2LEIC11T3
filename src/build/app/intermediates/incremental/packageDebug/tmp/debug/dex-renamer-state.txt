@@ -1,4 +1,4 @@
-#Tue Apr 12 03:32:46 PDT 2022
-base.0=/home/diogo/Documents/foodFeupTrial/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Fri Apr 29 11:49:13 BST 2022
+base.0=C\:\\Users\\mpspm\\Desktop\\UNI_App-main\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

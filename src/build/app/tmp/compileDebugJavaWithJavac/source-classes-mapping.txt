@@ -1,4 +1,4 @@
 io/flutter/plugins/GeneratedPluginRegistrant.java
  io.flutter.plugins.GeneratedPluginRegistrant
-com/example/food_feup/BuildConfig.java
- com.example.food_feup.BuildConfig
+pt/up/fe/ni/uni/BuildConfig.java
+ pt.up.fe.ni.uni.BuildConfig
