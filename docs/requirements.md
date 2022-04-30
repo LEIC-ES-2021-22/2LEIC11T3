@@ -43,8 +43,17 @@
 | *Preconditions* | The user wants to give his opinion on the experience. |
 | *Postconditions* | After rating the meal, anyone can look it up. |
 | *Normal flow* | 1. The user opens the applications. <br> 2. The user selects an establishment. <br> 3. The user selects one menu from the available <br> 4. The user leaves a rating |
-| *Alternative flow and exceptions* | 1. [Leave a comment] After step 4, the user can comment on his experience. <br>  2. [Gets a Recommendation] In step 2, the user can click the recommendations button. Then the user inputs his preference. After that the user receives a menu recommendations and leaves a rating. |
+| *Alternative flow and exceptions* | 1. [Leave a comment] After step 4, the user can comment on his experience. <br>  2. [Gets a Recommendation] In step 2, the user can click the recommendations button. Then the user inputs his preference. After that the user receives a menu recommendations and leaves a rating.|
 
+|||
+| --- | --- |
+| *Name* | Read a Comment |
+| *Actor* | Authenticated User | 
+| *Description* | Allow the user to read comments about a specific meal |
+| *Preconditions* | The user is interested in the other's opinion about a meal |
+| *Postconditions* | The user has a better knowledge about the quality of a meal |
+| *Normal flow* | 1. The user opens the application.<br> 2.The user selects an establishment. <br> 3. The user selects 1 menu from the available.<br> 4. The user can scroll through the comments to read them. |
+| *Alternative flows and exceptions* | 1. [Recommendation] If, in step 2 the user selects the recommendation button, he is then presented with meals. By selecting one menu, the user can read the comments.<br> 2. [No Comments] If in step 4 of the normal flow there are no comments on that menu, it presents the user with a message saying "There are no comments yet.". |
 
 ### Domain model
 
