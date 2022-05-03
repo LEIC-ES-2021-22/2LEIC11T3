@@ -44,9 +44,9 @@ class MealSlot extends StatelessWidget{
       Theme.of(context).textTheme.headline3.apply(fontSizeDelta: 5),
       TextAlign.center);
     final mealNameTextField = createTextField(
-        "Espetade de aves no forno com batata frita e alface",//this.name,//TODO: fix overlow for long text
+        "Espetada de aves no forno com batata frita e alface",//this.name,//TODO: fix overlow for long text
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
-        TextAlign.center);
+        TextAlign.justify);
     final ratingValueTextField = createTextField(
         "5",
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
@@ -59,22 +59,28 @@ class MealSlot extends StatelessWidget{
 
     return [
       Column(
-        children:<Widget>[
-          Row(
-          children: <Widget>[
-          mealTypeTextField,
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              ratingValueTextField,
-              ratingQuantityTextField,
-            ],
-          )
-      ]
+          children:<Widget>[
+            Row(
+              children: <Widget>[
+                mealTypeTextField,
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
+                ratingValueTextField,
+                ratingQuantityTextField,
+              ],
+            )
+          ]
       ),
-      mealNameTextField,
-      mealNameTextField
+      Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
+      Expanded(child: mealNameTextField),
+      Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
+      createReviewButton()
     ];
   }
 
@@ -82,7 +88,34 @@ class MealSlot extends StatelessWidget{
     return Text(
       text,
       overflow: TextOverflow.ellipsis,
+      softWrap: false,
+      maxLines: 2,
+      textAlign: alignment,
       style: style,
+    );
+  }
+
+  bool decoy(){
+    return false;
+  }
+
+  Widget createReviewButton(){
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      child: SizedBox(
+          height: 20,
+          width: 20,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+              primary: Colors.red,
+            ),
+            onPressed: decoy,//TODO change to real function
+
+          )
+      ),
     );
   }
 
