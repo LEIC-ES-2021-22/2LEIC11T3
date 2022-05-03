@@ -1,11 +1,10 @@
-import 'package:uni/model/app_state.dart';
-import 'package:uni/model/entities/lecture.dart';
+
 import 'package:flutter/material.dart';
 import 'package:uni/view/Widgets/page_title.dart';
 import 'package:uni/view/Widgets/request_dependent_widget_builder.dart';
-import 'package:uni/view/Widgets/schedule_slot.dart';
 
 import '../../model/entities/meal.dart';
+import '../Widgets/meal_slot.dart';
 
 class FoodFeupEstablishmentPageView extends StatelessWidget {
   FoodFeupEstablishmentPageView(
@@ -40,7 +39,7 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
       Expanded(
           child: TabBarView(
             controller: tabController,
-            children: createSchedule(context),
+            children: createMealList(context),
           ))
     ]);
   }
@@ -58,30 +57,27 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
     return tabs;
   }
 
-  List<Widget> createSchedule(context) {
+  List<Widget> createMealList(context) {
     final List<Widget> tabBarViewContent = <Widget>[];
     for (int i = 0; i < daysOfTheWeek.length; i++) {
-      tabBarViewContent.add(createScheduleByDay(context, i));
+      tabBarViewContent.add(createMealListByDay(context, i));
     }
     return tabBarViewContent;
   }
 
   /// Returns a list of widgets for the rows with a singular class info.
-  List<Widget> createScheduleRows(lectures, BuildContext context) {// TODO Change to meal info
-    final List<Widget> scheduleContent = <Widget>[];
-    for (int i = 0; i < lectures.length; i++) {
-      final Lecture lecture = lectures[i];
-      scheduleContent.add(ScheduleSlot(
-        subject: lecture.subject,
-        typeClass: lecture.typeClass,
-        rooms: lecture.room,
-        begin: lecture.startTime,
-        end: lecture.endTime,
-        teacher: lecture.teacher,
-        classNumber: lecture.classNumber,
+  List<Widget> createMealRows(meals, BuildContext context) {
+    final List<Widget> mealContent = <Widget>[];
+    for (int i = 0; i < meals.length; i++) {
+      final Meal meal = meals[i];
+      mealContent.add(MealSlot(
+        type: meal.name,
+        name: meal.name,
+        rating: 0,
+        ratingQuantity: 0,
       ));
     }
-    return scheduleContent;
+    return mealContent;
   }
 
   Widget Function(dynamic daycontent, BuildContext context) dayColumnBuilder(
@@ -91,14 +87,14 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
           key: Key('establishment-page-day-column-$day'),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: createScheduleRows(dayContent, context),
+            children: createMealRows(dayContent, context),
           ));
     }
 
     return createDayColumn;
   }
 
-  Widget createScheduleByDay(BuildContext context, int day) {
+  Widget createMealListByDay(BuildContext context, int day) {
     return RequestDependentWidgetBuilder(
       context: context,
       //status: scheduleStatus,

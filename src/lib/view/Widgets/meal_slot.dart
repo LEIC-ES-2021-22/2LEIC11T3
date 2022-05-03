@@ -6,14 +6,14 @@ class MealSlot extends StatelessWidget{
   final String type;
   final String name;
   final int rating;
-  final int ratingQauntity;
+  final int ratingQuantity;
 
   MealSlot({
     Key key,
     @required this.type,
     @required this.name,
-    @required this.rating,
-    @required this.ratingQauntity,
+    this.rating,
+    this.ratingQuantity,
   }): super(key: key);
 
   @override
