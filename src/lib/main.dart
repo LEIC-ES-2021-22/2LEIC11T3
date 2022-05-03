@@ -24,6 +24,7 @@ import 'package:uni/view/navigation_service.dart';
 import 'package:uni/view/theme.dart';
 
 import 'controller/on_start_up.dart';
+import 'model/food_feup_establishment_page_model.dart';
 import 'model/schedule_page_model.dart';
 
 /// Stores the state of the app
@@ -106,7 +107,6 @@ class MyAppState extends State<MyApp> {
               case '/' + Constants.navLogOut:
                 return LogoutRoute.buildLogoutRoute();
               case '/' + Constants.navFoodFeup:
-                  print("Here");
                   return PageTransition.makePageTransition(
                       page: FoodFeupMainMenuPageView(),
                       settings: settings,
