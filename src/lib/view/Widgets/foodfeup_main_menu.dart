@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:uni/model/food_feup_establishment_page_model.dart';
+import 'package:uni/view/Widgets/page_transition.dart';
 
 class FoodFeupMainMenu extends StatefulWidget{
   @override
@@ -32,25 +35,28 @@ class FoodFeupMainMenuState extends State<FoodFeupMainMenu>{
   }
 }
 
-bool decoy() {
-    print('sucessful');
-    return true;
+bool transitionToEstablishment(BuildContext context, String buttonName) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const FoodFeupEstablishmentPage()));
+
+  return true;
 }
 
 List<Widget> getWidgets(BuildContext context) {
   final List<Widget> widgets = [];
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Cantina', '11h30-14h00 / 18h30-20h30', Colors.red , decoy));
+  widgets.add(createButton(context, 'Cantina', '11h30-14h00 / 18h30-20h30', Colors.red, transitionToEstablishment));
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Grill', '12h00-14h00', Colors.red , decoy));
+  widgets.add(createButton(context, 'Grill', '12h00-14h00', Colors.red , transitionToEstablishment));
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Cafetaria', '8h30-17h30', Colors.red , decoy));
+  widgets.add(createButton(context, 'Cafetaria', '8h30-17h30', Colors.red , transitionToEstablishment));
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Restaurante INEGI', '', Colors.red , decoy));
+  widgets.add(createButton(context, 'Restaurante INEGI', '', Colors.red , transitionToEstablishment));
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Bar INESC TEC', '', Colors.red , decoy));
+  widgets.add(createButton(context, 'Bar INESC TEC', '', Colors.red , transitionToEstablishment));
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , decoy));
+  widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , transitionToEstablishment));
 
   return widgets;
 }
@@ -68,7 +74,7 @@ Widget createButton(BuildContext context, String buttonName, String timeTable, C
           ),
           primary: colour,
         ),
-        onPressed: action,
+        onPressed: ()=> action(context, buttonName),
 
         child: ListView(
             children: generateButtonText(context, buttonName, timeTable),
