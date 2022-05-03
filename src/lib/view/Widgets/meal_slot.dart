@@ -40,16 +40,40 @@ class MealSlot extends StatelessWidget{
 
   List<Widget> createMealSlotPrimInfo(context){
     final mealTypeTextField = createTextField(
-      this.type,
+      "Carne",
       Theme.of(context).textTheme.headline3.apply(fontSizeDelta: 5),
       TextAlign.center);
     final mealNameTextField = createTextField(
-        this.type,
+        "Espetade de aves no forno com batata frita e alface",//this.name,//TODO: fix overlow for long text
+        Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
+        TextAlign.center);
+    final ratingValueTextField = createTextField(
+        "5",
+        Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
+        TextAlign.center);
+    final ratingQuantityTextField = createTextField(
+        "(20)",
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
         TextAlign.center);
 
+
     return [
-      mealTypeTextField,
+      Column(
+        children:<Widget>[
+          Row(
+          children: <Widget>[
+          mealTypeTextField,
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              ratingValueTextField,
+              ratingQuantityTextField,
+            ],
+          )
+      ]
+      ),
+      mealNameTextField,
       mealNameTextField
     ];
   }
