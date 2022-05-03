@@ -68,7 +68,7 @@ class FormTextField extends StatelessWidget {
                 }
                 return formatValidator != null ? formatValidator(value) : null;
               },
-            ))
+              ),key: Key('key_bug_form_$description')) //Gherkin key
           ])
         ],
       ),

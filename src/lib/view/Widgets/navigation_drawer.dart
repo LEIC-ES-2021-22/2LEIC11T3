@@ -98,6 +98,7 @@ class NavigationDrawerState extends State<NavigationDrawer> {
                     fontWeight: FontWeight.normal)),
           ),
           dense: true,
+          key: Key('key_$d'),//Gherkin key
           contentPadding: EdgeInsets.all(0.0),
           selected: d == getCurrentRoute(),
           onTap: () => drawerItems[d](d),
@@ -113,6 +114,7 @@ class NavigationDrawerState extends State<NavigationDrawer> {
     }
 
     return Drawer(
+        key: const Key('menu'),//Gherkin key
         child: Column(
       children: <Widget>[
         Expanded(
