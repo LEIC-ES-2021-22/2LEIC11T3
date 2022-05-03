@@ -38,9 +38,8 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     final aggMeals = <List<Meal>>[];
 
     for (int i = 0; i < daysOfTheWeek.length; i++) {
-      final List<Meal> Meals = <Meal>[];
-      Meals[0] = Meal("Carne", "teste", DayOfWeek.monday, DateTime.now());
-      Meals[1] = Meal("Peixe", "teste2", DayOfWeek.monday, DateTime.now());
+      final List<Meal> Meals = List.filled(2,Meal("Carne", "teste", DayOfWeek.monday, DateTime.now()));
+
       //for (int j = 0; j < 2; j++) {
         //if (schedule[j].day == i) Meals.add(schedule[j]);
 

@@ -67,7 +67,7 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
   }
 
   /// Returns a list of widgets for the rows with a singular class info.
-  List<Widget> createScheduleRows(lectures, BuildContext context) {
+  List<Widget> createScheduleRows(lectures, BuildContext context) {// TODO Change to meal info
     final List<Widget> scheduleContent = <Widget>[];
     for (int i = 0; i < lectures.length; i++) {
       final Lecture lecture = lectures[i];
