@@ -80,7 +80,12 @@ Widget createButton(BuildContext context, String buttonName, String timeTable, C
 
 List<Widget> generateButtonText(BuildContext context, String buttonName, String timeTable) {
   final List<Widget> widgets = [];
-  widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 7)));
+  if(timeTable == '') {
+    widgets.add(Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)));
+  } else {
+    widgets.add(Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)));
+  }
+
   widgets.add(Text(buttonName,
       style: TextStyle(
           color: Colors.white,
