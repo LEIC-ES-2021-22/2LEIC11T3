@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:uni/model/entities/meal.dart';
 import 'package:uni/model/utils/day_of_week.dart';
-import 'package:uni/view/Pages/schedule_page_view.dart';
+import 'package:gsheets/gsheets.dart';
 import 'package:uni/view/Pages/secondary_page_view.dart';
 
 import '../view/Pages/foodfeup_establishment_view.dart';
+import '../../utils/constants.dart' as Constants;
 
 class FoodFeupEstablishmentPage extends StatefulWidget {
   const FoodFeupEstablishmentPage({Key key}) : super(key: key);
@@ -34,17 +35,43 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     'Domingo'
   ];
 
-  List<List<Meal>> _groupMealsByDay() {
+  Future<Worksheet> readFromSheets() async {
+    // init GSheets
+    final gsheets = GSheets(Constants.credentials);
+    // fetch spreadsheet by its id
+    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
+    // get worksheet by its title
+    final sheet = await ss.worksheetByTitle('Sheet1');
+
+    print("SADSDASKFAS\n\n\n\ ");
+    print(await sheet.values.row(2));
+    print("SADSDASKFAS\n\n\n\ ");
+
+    return sheet;
+  }
+
+
+  List<List<Meal>> _groupMealsByDay()  {
     final aggMeals = <List<Meal>>[];
+    Worksheet sheet;
+    Future<Worksheet> future = Future.delayed(
+        Duration(seconds: 2),
+        () => readFromSheets()
+    );
+
+    
+    future.then((value) => sheet);
+    //print(sheet.values.row(2));
 
     for (int i = 0; i < daysOfTheWeek.length; i++) {
-      final List<Meal> Meals = List.filled(2,Meal("Carne", "teste", DayOfWeek.monday, DateTime.now()));
-
-      //for (int j = 0; j < 2; j++) {
+      final List<Meal> meals = List.filled(2,Meal("Carne", "teste", DayOfWeek.monday, DateTime.now()));
+        //final List<Meal> meals = List.filled(2, null);
+        //meals[0] = Meal(sheet.toString());
+        //for (int j = 0; j < 2; j++) {
         //if (schedule[j].day == i) Meals.add(schedule[j]);
 
       //}
-      aggMeals.add(Meals);
+      aggMeals.add(meals);
     }
     return aggMeals;
   }
