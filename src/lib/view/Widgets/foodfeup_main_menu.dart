@@ -166,12 +166,21 @@ List<Widget> generateButtonText(BuildContext context, String buttonName, String 
     widgets.add(Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)));
   }
 
-  widgets.add(Text(buttonName,
-      style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
-          fontSize: 20),
-      textAlign: TextAlign.center));
+  widgets.add(
+    Center(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Text(buttonName,
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+                fontSize: 20,
+                overflow: TextOverflow.ellipsis
+            ),
+            textAlign: TextAlign.center),
+      ),
+    ),
+);
   widgets.add(Text(timeTable,
       style: TextStyle(
           color: Colors.white,
