@@ -68,7 +68,6 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     final offset = (weekDay > 5) ? 0 : (weekDay - 1) % daysOfTheWeek.length;
     tabController.animateTo((tabController.index + offset));
 
-
   }
 
   @override
@@ -78,10 +77,13 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
   }
 
   Widget LoadingScreen() {
-    return SizedBox(
-      width: 60,
-      height: 60,
-      child: CircularProgressIndicator(),
+
+    return Center(
+      child: SizedBox(
+        width: 60,
+        height: 60,
+        child: CircularProgressIndicator(),
+      )
     );
   }
 
