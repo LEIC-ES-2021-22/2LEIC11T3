@@ -20,10 +20,14 @@ class FoodFeupEstablishmentPage extends StatefulWidget {
 
 class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     with SingleTickerProviderStateMixin {
-  final int weekDay = DateTime.now().weekday;
+  final int weekDay = DateTime
+      .now()
+      .weekday;
 
+  Worksheet sheet;
   TabController tabController;
   ScrollController scrollViewController;
+  final aggMeals = <List<Meal>>[];
 
   final List<String> daysOfTheWeek = [
     'Segunda-feira',
@@ -35,45 +39,26 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     'Domingo'
   ];
 
-  Future<Worksheet> readFromSheets() async {
-    // init GSheets
+  Future readFromSheets() async {
     final gsheets = GSheets(Constants.credentials);
     // fetch spreadsheet by its id
     final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
     // get worksheet by its title
     final sheet = await ss.worksheetByTitle('Sheet1');
 
-    print("SADSDASKFAS\n\n\n\ ");
-    print(await sheet.values.row(2));
-    print("SADSDASKFAS\n\n\n\ ");
-
-    return sheet;
-  }
-
-
-  List<List<Meal>> _groupMealsByDay()  {
-    final aggMeals = <List<Meal>>[];
-    Worksheet sheet;
-    Future<Worksheet> future = Future.delayed(
-        Duration(seconds: 2),
-        () => readFromSheets()
-    );
-
-    
-    future.then((value) => sheet);
-    //print(sheet.values.row(2));
+    //print("SADSDASKFAS\n\n\n\ ");
 
     for (int i = 0; i < daysOfTheWeek.length; i++) {
-      final List<Meal> meals = List.filled(2,Meal("Carne", "teste", DayOfWeek.monday, DateTime.now()));
-        //final List<Meal> meals = List.filled(2, null);
-        //meals[0] = Meal(sheet.toString());
-        //for (int j = 0; j < 2; j++) {
-        //if (schedule[j].day == i) Meals.add(schedule[j]);
-
-      //}
+      List<Meal> meals = [];
+      for(int j= 1; j < 6; j++){
+        List<String> line = await sheet.values.row(j);
+        print(line);
+        meals.add(Meal(line[0], line[1], DayOfWeek.monday, DateTime.now()));
+      }
       aggMeals.add(meals);
     }
-    return aggMeals;
+
+    return sheet;
   }
 
   @override
@@ -82,6 +67,8 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     tabController = TabController(vsync: this, length: daysOfTheWeek.length);
     final offset = (weekDay > 5) ? 0 : (weekDay - 1) % daysOfTheWeek.length;
     tabController.animateTo((tabController.index + offset));
+
+
   }
 
   @override
@@ -90,19 +77,31 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     super.dispose();
   }
 
+  Widget LoadingScreen() {
+    return SizedBox(
+      width: 60,
+      height: 60,
+      child: CircularProgressIndicator(),
+    );
+  }
+
+
   @override
   Widget getBody(BuildContext context) {
-    return StoreConnector<AppState, Tuple2<List<Lecture>, RequestStatus>>(
-      converter: (store) => Tuple2(store.state.content['schedule'],
-          store.state.content['scheduleStatus']),
-      builder: (context, lectureData) {
-        return FoodFeupEstablishmentPageView(
-            tabController: tabController,
-            scrollViewController: scrollViewController,
-            daysOfTheWeek: daysOfTheWeek,
-            aggMeals: _groupMealsByDay()
-        );
-      },
-    );
+    if (sheet == null) {
+      readFromSheets().then((sheet) {
+        setState(() {
+          this.sheet = sheet;
+        });
+      });
+      return LoadingScreen();
+    } else {
+      return FoodFeupEstablishmentPageView(
+          tabController: tabController,
+          scrollViewController: scrollViewController,
+          daysOfTheWeek: daysOfTheWeek,
+          aggMeals: aggMeals
+      );
+    }
   }
 }

@@ -40,11 +40,11 @@ class MealSlot extends StatelessWidget{
 
   List<Widget> createMealSlotPrimInfo(context){
     final mealTypeTextField = createTextField(
-      "Carne",
+      type,
       Theme.of(context).textTheme.headline3.apply(fontSizeDelta: 5),
       TextAlign.center);
     final mealNameTextField = createTextField(
-        "Espetada de aves no forno com batata frita e alface",//this.name,//TODO: fix overlow for long text
+        name,//this.name,//TODO: fix overlow for long text
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
         TextAlign.justify);
     final ratingValueTextField = createTextField(
