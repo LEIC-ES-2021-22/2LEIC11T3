@@ -116,15 +116,18 @@ bool transitionToEstablishment(BuildContext context, String buttonName) {
 Future<List<Widget>> getWidgets(BuildContext context) async {
   final List<Widget> widgets = [];
   await RestaurantFetcherHtml().getRestaurants(state).then((restaurants) {
+    String aux = '';
     for(var rest in restaurants) {
-      if(rest.name.contains("Jantar")) {
+      if(rest.name.contains("Almoço")) {
+        aux = rest.timetable;
         continue;
-      } else if(rest.name.contains("Almoço")) {
+      } else if(rest.name.contains("Jantar")) {
         widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-        widgets.add(createButton(context, rest.name.substring(0, rest.name.indexOf(" - Almoço")), '11h30-14h00 / 18h30-20h30', Colors.red, transitionToEstablishment));
+        widgets.add(createButton(context, rest.name.substring(0, rest.name.indexOf(" - Jantar")), aux + '/' + rest.timetable, Colors.red, transitionToEstablishment));
+        aux = '';
       } else {
         widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-        widgets.add(createButton(context, rest.name, '11h30-14h00 / 18h30-20h30', Colors.red, transitionToEstablishment));
+        widgets.add(createButton(context, rest.name, rest.timetable, Colors.red, transitionToEstablishment));
       }
     }
   });
@@ -180,7 +183,7 @@ List<Widget> generateButtonText(BuildContext context, String buttonName, String 
             textAlign: TextAlign.center),
       ),
     ),
-);
+  );
   widgets.add(Text(timeTable,
       style: TextStyle(
           color: Colors.white,

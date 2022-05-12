@@ -6,6 +6,7 @@ import 'meal.dart';
 class Restaurant{
   final int id;
   final String name;
+  String timetable;
   final String reference; // Used only in html parser
   final Map<DayOfWeek, List<Meal>> meals;
 
@@ -13,11 +14,15 @@ class Restaurant{
   Restaurant(this.id, this.name, this.reference, {List<Meal> meals = null})
         : this.meals = meals != null
             ? groupBy(meals, (meal) => meal.dayOfWeek)
-            : HashMap.identity(){}
+            : HashMap.identity(){
+    this.timetable = '';
+  }
 
+  /*
   static Restaurant fromMap(Map<String, dynamic> map){
     return Restaurant(map['id'], map['name'], map['ref'], meals:map['meals']);
   }
+  */
 
   List<Meal> getMealsOfDay(DayOfWeek dayOfWeek){
     return meals[dayOfWeek];
