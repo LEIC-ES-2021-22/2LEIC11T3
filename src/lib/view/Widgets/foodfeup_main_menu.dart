@@ -143,7 +143,7 @@ Widget createButton(BuildContext context, String buttonName, String timeTable, C
     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
     child: SizedBox(
       height: 75,
-      width: 250,
+      width: 300,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -177,7 +177,7 @@ List<Widget> generateButtonText(BuildContext context, String buttonName, String 
             style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
-                fontSize: 20,
+                fontSize: 21,
                 overflow: TextOverflow.ellipsis
             ),
             textAlign: TextAlign.center),
@@ -188,7 +188,7 @@ List<Widget> generateButtonText(BuildContext context, String buttonName, String 
       style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w400,
-          fontSize: 14),
+          fontSize: 18),
       textAlign: TextAlign.center));
 
   return widgets;
