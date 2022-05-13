@@ -71,7 +71,7 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
     for (int i = 0; i < meals.length; i++) {
       final Meal meal = meals[i];
       mealContent.add(MealSlot(
-        type: meal.name,
+        type: meal.type,
         name: meal.name,
         rating: 0,
         ratingQuantity: 0,

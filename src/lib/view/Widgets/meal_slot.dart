@@ -29,7 +29,7 @@ class MealSlot extends StatelessWidget{
   Widget createMealSlotRow(context) {
     return  Container(
         key: Key('schedule-slot-time-${this.name}'),
-        margin: EdgeInsets.only(top: 3.0, bottom: 3.0),
+        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,13 +40,13 @@ class MealSlot extends StatelessWidget{
 
   List<Widget> createMealSlotPrimInfo(context){
     final mealTypeTextField = createTextField(
-      "Carne",
+      this.type,
       Theme.of(context).textTheme.headline3.apply(fontSizeDelta: 5),
       TextAlign.center);
     final mealNameTextField = createTextField(
-        "Espetada de aves no forno com batata frita e alface",//this.name,//TODO: fix overlow for long text
+        this.name,
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
-        TextAlign.justify);
+        TextAlign.center);
     final ratingValueTextField = createTextField(
         "5",
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
@@ -101,11 +101,14 @@ class MealSlot extends StatelessWidget{
 
   Widget createReviewButton(){
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: SizedBox(
-          height: 20,
-          width: 20,
+          height: 30,
+          width: 30,
           child: ElevatedButton(
+            child: Center(
+              child: Icon(Icons.star,color: Colors.white,size: 10,),
+            ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),
@@ -113,6 +116,7 @@ class MealSlot extends StatelessWidget{
               primary: Colors.red,
             ),
             onPressed: decoy,//TODO change to real function
+
 
           )
       ),
