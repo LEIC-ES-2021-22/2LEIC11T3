@@ -23,6 +23,7 @@ Future<List<Restaurant>> getRestaurantsFromHtml(Response response) async {
       return Tuple2(ref, name);
   }).toList();
 
+  final List<Element> restaurantsSchedule = document.querySelectorAll('h3');
 
   //Get restaurant meals and create the Restaurant class
   final List<Restaurant> restaurants = restaurantsTuple.map( (restaurantTuple) {
@@ -75,5 +76,12 @@ Future<List<Restaurant>> getRestaurantsFromHtml(Response response) async {
         restaurantTuple.item1,
         meals: meals);
   }).toList();
+
+  int index = 0;
+  for(Restaurant r in restaurants) {
+    r.timetable = restaurantsSchedule[index].text.substring(9);
+    index++;
+  }
+
   return restaurants;
 }
