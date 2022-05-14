@@ -16,5 +16,5 @@
 
 ## Iteration planning and Backlog management
 <p align="center" justify="center">
-  <img src="https://github.com/LEIC-ES-2021-22/2LEIC11T3/blob/0686e7e894adced8332fa2b46d202747fb7dc438/images/ProjectBoardIteration1.png">
+  <img src="../images/ProjectBoardIteration1.png" >
 </p>
