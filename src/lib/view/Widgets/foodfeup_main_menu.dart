@@ -61,45 +61,50 @@ class FoodFeupMainMenuState extends State<FoodFeupMainMenu>{
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: FutureBuilder<List<Widget>>(
-          future: getWidgets(context),
-          builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
-            List<Widget> children;
-            if (snapshot.hasData) {
-              children = snapshot.data;
-            } else if (snapshot.hasError) {
-              children = <Widget>[
-                const Icon(
-                  Icons.error_outline,
-                  color: Colors.red,
-                  size: 60,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: FutureBuilder<List<Widget>>(
+            future: getWidgets(context),
+            builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+              List<Widget> children;
+              if (snapshot.hasData) {
+                children = snapshot.data;
+              } else if (snapshot.hasError) {
+                children = <Widget>[
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text('Error: ${snapshot.error}'),
+                  )
+                ];
+              } else {
+                children = const <Widget>[
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text('Awaiting result...'),
+                  )
+                ];
+              }
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: children,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Text('Error: ${snapshot.error}'),
-                )
-              ];
-            } else {
-              children = const <Widget>[
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: CircularProgressIndicator(),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Text('Awaiting result...'),
-                )
-              ];
-            }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children,
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
+
+
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
