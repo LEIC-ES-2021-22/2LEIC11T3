@@ -6,6 +6,7 @@ import 'package:uni/view/Widgets/page_transition.dart';
 
 import '../../main.dart';
 import '../../model/entities/restaurant.dart';
+import '../../model/foodfeup_suggestion_model.dart';
 
 class FoodFeupMainMenu extends StatefulWidget{
   @override
@@ -118,6 +119,14 @@ bool transitionToEstablishment(BuildContext context, String buttonName) {
   return true;
 }
 
+bool transitionToSuggestion(BuildContext context, String buttonName) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const FoodFeupSuggestionPage()));
+
+  return true;
+}
+
 Future<List<Widget>> getWidgets(BuildContext context) async {
   final List<Widget> widgets = [];
   await RestaurantFetcherHtml().getRestaurants(state).then((restaurants) {
@@ -138,7 +147,7 @@ Future<List<Widget>> getWidgets(BuildContext context) async {
   });
 
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , transitionToEstablishment));
+  widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , transitionToSuggestion));
 
   return widgets;
 }
