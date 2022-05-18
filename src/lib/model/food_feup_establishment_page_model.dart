@@ -64,17 +64,33 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     final sheet = await ss.worksheetByTitle('Sheet1');
 
     //print("SADSDASKFAS\n\n\n\ ");
+    for(int i = 0; i < getCurrDayInt()-1; i++) {
+      aggMeals.add([]);
+    }
+    for(DayOfWeek day in meals.keys) {
+      aggMeals.add(meals[day]);
+    }
+    while(aggMeals.length < 7) {
+      aggMeals.add([]);
+    }
 
+    /*
     for (int i = 0; i < daysOfTheWeek.length; i++) {
       List<Meal> meals = [];
       for(int j= 1; j < 6; j++){
         List<String> line = await sheet.values.row(j);
-        print(line);
+        //print(line);
         meals.add(Meal(line[0], line[1], DayOfWeek.monday, DateTime.now()));
       }
       aggMeals.add(meals);
     }
-
+    */
+    for(int i = 0; i < aggMeals.length; i++) {
+      for(Meal m in aggMeals[i]){
+        print(m.name + " " + m.type + " " + m.dayOfWeek.toString() + " " + m.date.toString());
+      }
+      print("-------");
+    }
     return sheet;
   }
 
@@ -103,7 +119,6 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
       )
     );
   }
-
 
   @override
   Widget getBody(BuildContext context) {
