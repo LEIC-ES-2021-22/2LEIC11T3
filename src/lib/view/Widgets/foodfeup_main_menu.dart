@@ -16,52 +16,10 @@ class FoodFeupMainMenu extends StatefulWidget{
 }
 
 class FoodFeupMainMenuState extends State<FoodFeupMainMenu>{
-  List<Widget> _list;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchList();
-  }
-
-  Future _fetchList() async {
-    List<Widget> widgets = [];
-
-    await RestaurantFetcherHtml().getRestaurants(state).then((restaurants) {
-      for(var rest in restaurants) {
-        if(rest.name.contains("Jantar")) {
-          continue;
-        } else if(rest.name.contains("Almoço")) {
-          widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-          widgets.add(createButton(context, rest.name.substring(0, rest.name.indexOf(" - Almoço")), '11h30-14h00 / 18h30-20h30', Colors.red, transitionToEstablishment));
-        } else {
-          widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-          widgets.add(createButton(context, rest.name, '11h30-14h00 / 18h30-20h30', Colors.red, transitionToEstablishment));
-        }
-      }
-    });
-
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-    widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , transitionToEstablishment));
-
-    // call setState here to set the actual list of items and rebuild the widget.
-    setState(() {
-      _list = widgets;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: FutureBuilder<List<Widget>>(
@@ -111,15 +69,15 @@ class FoodFeupMainMenuState extends State<FoodFeupMainMenu>{
   }
 }
 
-bool transitionToEstablishment(BuildContext context, String buttonName) {
+bool transitionToEstablishment(BuildContext context, String buttonName, Map meals) {
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const FoodFeupEstablishmentPage()));
+    MaterialPageRoute(builder: (context) => FoodFeupEstablishmentPage(restaurantName: buttonName, meals: meals)));
 
   return true;
 }
 
-bool transitionToSuggestion(BuildContext context, String buttonName) {
+bool transitionToSuggestion(BuildContext context, String buttonName, Map unused) {
   Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const FoodFeupSuggestionPage()));
@@ -130,29 +88,21 @@ bool transitionToSuggestion(BuildContext context, String buttonName) {
 Future<List<Widget>> getWidgets(BuildContext context) async {
   final List<Widget> widgets = [];
   await RestaurantFetcherHtml().getRestaurants(state).then((restaurants) {
-    String aux = '';
     for(var rest in restaurants) {
-      if(rest.name.contains("Almoço")) {
-        aux = rest.timetable;
-        continue;
-      } else if(rest.name.contains("Jantar")) {
         widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-        widgets.add(createButton(context, rest.name.substring(0, rest.name.indexOf(" - Jantar")), aux + '/' + rest.timetable, Colors.red, transitionToEstablishment));
-        aux = '';
-      } else {
-        widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-        widgets.add(createButton(context, rest.name, rest.timetable, Colors.red, transitionToEstablishment));
+        widgets.add(createButton(context, rest.name, rest.timetable, Colors.red, rest.meals, transitionToEstablishment));
       }
     }
-  });
+  );
 
   widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)));
-  widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , transitionToSuggestion));
+  widgets.add(createButton(context, 'Recomendação', 'Hoje', Colors.grey , {},transitionToSuggestion));
 
   return widgets;
 }
 
-Widget createButton(BuildContext context, String buttonName, String timeTable, Color colour, Function action) {
+Widget createButton(BuildContext context, String buttonName, String timeTable,
+    Color colour, Map meals, Function action) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
     child: SizedBox(
@@ -165,7 +115,7 @@ Widget createButton(BuildContext context, String buttonName, String timeTable, C
           ),
           primary: colour,
         ),
-        onPressed: ()=> action(context, buttonName),
+        onPressed: ()=> action(context, buttonName, meals),
 
         child: ListView(
             children: generateButtonText(context, buttonName, timeTable),

@@ -12,14 +12,31 @@ import '../view/Pages/foodfeup_establishment_view.dart';
 import '../../utils/constants.dart' as Constants;
 
 class FoodFeupEstablishmentPage extends StatefulWidget {
-  const FoodFeupEstablishmentPage({Key key}) : super(key: key);
+  const FoodFeupEstablishmentPage({Key key,
+      @required this.restaurantName,
+      @required this.meals}) :
+        super(key: key);
+
+  final String restaurantName;
+  final Map<DayOfWeek, List<Meal>> meals;
 
   @override
-  _FoodFeupEstablishmentPageState createState() => _FoodFeupEstablishmentPageState();
+  _FoodFeupEstablishmentPageState createState() => _FoodFeupEstablishmentPageState(
+      restaurantName: this.restaurantName,
+      meals: this.meals
+  );
 }
 
 class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     with SingleTickerProviderStateMixin {
+  _FoodFeupEstablishmentPageState(
+      {Key key,
+        @required this.restaurantName,
+        @required this.meals
+  });
+  final String restaurantName;
+  final Map<DayOfWeek, List<Meal>> meals;
+
   final int weekDay = DateTime
       .now()
       .weekday;
