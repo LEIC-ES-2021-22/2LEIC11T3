@@ -28,7 +28,7 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: <Widget>[
-          PageTitle(name: 'Comida'),
+          PageTitle(key: Key("establishment_menu"),name: 'Comida'),
           TabBar(
             controller: tabController,
             isScrollable: true,
