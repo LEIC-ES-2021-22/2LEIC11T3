@@ -1,15 +1,10 @@
-import 'package:tuple/tuple.dart';
-import 'package:uni/model/app_state.dart';
-import 'package:uni/model/entities/lecture.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:uni/model/entities/meal.dart';
 import 'package:uni/model/utils/day_of_week.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:uni/view/Pages/secondary_page_view.dart';
-
-import '../view/Pages/foodfeup_establishment_view.dart';
-import '../../utils/constants.dart' as Constants;
+import 'package:uni/view/Pages/foodfeup_establishment_view.dart';
+import 'package:uni/utils/constants.dart' as Constants;
 
 class FoodFeupEstablishmentPage extends StatefulWidget {
   const FoodFeupEstablishmentPage({Key key}) : super(key: key);
