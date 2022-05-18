@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:uni/controller/restaurant_fetcher/restaurant_fetcher_html.dart';
 import 'package:uni/model/food_feup_establishment_page_model.dart';
-import 'package:uni/view/Widgets/page_transition.dart';
-
 import '../../main.dart';
-import '../../model/entities/restaurant.dart';
 
 class FoodFeupMainMenu extends StatefulWidget{
   @override
@@ -150,6 +146,7 @@ Widget createButton(BuildContext context, String buttonName, String timeTable, C
       height: 70,
       width: 300,
       child: ElevatedButton(
+        key: Key("establishment_button_$buttonName"),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
