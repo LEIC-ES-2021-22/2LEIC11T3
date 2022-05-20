@@ -11,5 +11,5 @@ Feature: Open main menu
     Given I am logged in
     When I open the drawer
     And I tap the "key_Food FEUP" button
-    And I tap the "establishment_button_Cantina" button
+    And I tap the "establishment_button_Cantina" button and I dont wait
     Then I expect the widget 'establishment_menu' to be present within 30 seconds
