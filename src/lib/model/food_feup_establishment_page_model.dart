@@ -6,6 +6,8 @@ import 'package:uni/view/Pages/secondary_page_view.dart';
 import 'package:uni/view/Pages/foodfeup_establishment_view.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 
+import 'entities/review.dart';
+
 class FoodFeupEstablishmentPage extends StatefulWidget {
   const FoodFeupEstablishmentPage({Key key}) : super(key: key);
 
@@ -41,7 +43,7 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     // get worksheet by its title
     final sheet = await ss.worksheetByTitle('Sheet1');
 
-    //print("SADSDASKFAS\n\n\n\ ");
+    print("SADSDASKFAS\n\n\n\ ");
 
     for (int i = 0; i < daysOfTheWeek.length; i++) {
       List<Meal> meals = [];
@@ -49,6 +51,62 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
         List<String> line = await sheet.values.row(j);
         print(line);
         meals.add(Meal(line[0], line[1], DayOfWeek.monday, DateTime.now()));
+        int row = 4;
+        while (line[row].isNotEmpty)
+          {
+            print("Im inside the loop");
+            int str;
+            String usname;
+            String com;
+            int part = 0;
+            String text = "";
+            for (int k = 0; k < line[row].length; k++){
+              print("For number: $k");
+                if (part == 3)
+                  break;
+
+                if (line[row][k] == "&")
+                  {
+                    switch(part){
+                      case 0:
+                        str = int.parse(text);
+                        text = "";
+                        break;
+                      case 1:
+                        usname = text;
+                        text = "";
+                        break;
+                      case 2:
+                        com = text;
+                        text = "";
+                        break;
+                      default:
+                        break;
+                    }
+
+                    part++;
+
+                  }
+                else{
+                  text += line[row][k];
+                }
+              }
+
+            Review rev = Review(str, usname, DateTime.now(), meals[j], 1);
+            if (com != "")
+              {
+                rev.addComment(com);
+              }
+            rev.printReview();
+
+            meals[j].reviews.add(rev);  //RESTAURANT HARDCODED SEE THIS LATER
+
+            row++;
+
+          }
+
+
+
       }
       aggMeals.add(meals);
     }
