@@ -80,7 +80,7 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     widgets.add(
         generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
     widgets.add(
-        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+        generateCommentField(context, "Comentário bonito aqui asjsafsak fsamfsamfsafa fasmfamfas fsamfsamfasfsa ", "upxxxxxxxxx"));
     widgets.add(
         generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
     widgets.add(
@@ -95,33 +95,41 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     return widgets;
   }
 
-  Widget generateCommentField(BuildContext, String text, String user) {
-    return SizedBox(
-      height: 40,
-      child: Row(
-        children: [
-          Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
-          Column(
-            children: [
-              Icon(IconData(0xe491, fontFamily: 'MaterialIcons')),
-              generateText(context, user, TextAlign.left, Colors.black, 12),
-            ],
-          ),
-          VerticalDivider(color: Colors.grey, thickness: 4),
-          generateText(context, text, TextAlign.left, Colors.black, 12)
+  Widget generateCommentField(BuildContext context, String text, String user) {
+
+    return Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: Center(
+              child : SizedBox (
+                height: 40,
+                child: Row(
+                  children: [
+                    Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
+                      Column(
+                        children: [
+                          Icon(IconData(0xe491, fontFamily: 'MaterialIcons')),
+                          generateText(context, user, TextAlign.left, Colors.black, 12),
+                        ],
+                    ),
+                    VerticalDivider(color: Colors.grey, thickness: 4),
+                    generateText(context, text, TextAlign.left, Colors.black, 12)
         ],
       ),
+    )
+    )
     );
   }
 
+
   Widget generateText(BuildContext context, String text, TextAlign alignment,
       Color color, double fontSize) {
-    return Text(text,
-        style: TextStyle(
-            color: color,
-            fontWeight: FontWeight.w400,
-            fontSize: fontSize),
-        textAlign: alignment);
+    return Expanded(child:
+          Text(text,
+              style: TextStyle(
+                  color: color,
+                  fontWeight: FontWeight.w400,
+                   fontSize: fontSize),
+              textAlign: alignment)
+    );
   }
 
   Widget generateRatingBar(BuildContext context) {
