@@ -7,9 +7,13 @@ class Meal{
   final String name;
   final DayOfWeek dayOfWeek;
   final DateTime date;
-  Meal(this.type, this.name, this.dayOfWeek, this.date);
-
   List<Review> reviews;
+  Meal(this.type, this.name, this.dayOfWeek, this.date)
+  {
+    reviews = [];
+  }
+
+
 
 
   Map<String, dynamic> toMap(restaurantId) {

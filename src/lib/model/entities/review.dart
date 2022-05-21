@@ -4,13 +4,21 @@ import 'package:uni/model/entities/meal.dart';
 
 class Review{
   int stars;
-  final Meal meal;
-  final int rest_id;
-  final String username;
+  Meal meal;
+  int rest_id;
+  String username;
   DateTime date;
   String comment;
 
-  Review(this.stars, this.username, this.date, this.meal, this.rest_id);
+  Review(int st, String un, DateTime d, Meal m, int rid){
+    this.stars = st;
+    this.username = un;
+    this.date = d;
+    this.meal = m;
+    this.rest_id = rid;
+    this.comment = "";
+  }
+
 
 
   void addComment(String c)

@@ -41,21 +41,35 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     // fetch spreadsheet by its id
     final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
     // get worksheet by its title
-    final sheet = await ss.worksheetByTitle('Sheet1');
+    final sheet0 = await ss.worksheetByTitle('Segunda');
+    final sheet1 = await ss.worksheetByTitle('Terça');
+    final sheet2 = await ss.worksheetByTitle('Quarta');
+    final sheet3 = await ss.worksheetByTitle('Quinta');
+    final sheet4 = await ss.worksheetByTitle('Sexta');
+    final sheet5 = await ss.worksheetByTitle('Sábado');
+    final sheet6 = await ss.worksheetByTitle('Domingo');
+    List<Worksheet> week;
+    week.add(sheet0);
+    week.add(sheet1);
+    week.add(sheet2);
+    week.add(sheet3);
+    week.add(sheet4);
+    week.add(sheet5);
+    week.add(sheet6);
 
     print("SADSDASKFAS\n\n\n\ ");
 
     for (int i = 0; i < daysOfTheWeek.length; i++) {
       List<Meal> meals = [];
       for(int j= 1; j < 6; j++){
-        List<String> line = await sheet.values.row(j);
+        List<String> line = await week[i].values.row(j);
         print(line);
         meals.add(Meal(line[0], line[1], DayOfWeek.monday, DateTime.now()));
         int row = 4;
-        while (line[row].isNotEmpty)
+        while (row < line.length && line[row].isNotEmpty)
           {
             print("Im inside the loop");
-            int str;
+            int stars;
             String usname;
             String com;
             int part = 0;
@@ -69,7 +83,7 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
                   {
                     switch(part){
                       case 0:
-                        str = int.parse(text);
+                        stars = int.parse(text);
                         text = "";
                         break;
                       case 1:
@@ -92,14 +106,27 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
                 }
               }
 
-            Review rev = Review(str, usname, DateTime.now(), meals[j], 1);
+            switch(part){
+              case 1:
+                usname = text;
+                break;
+              case 2:
+                com = text;
+                break;
+              default:
+                break;
+            }
+
+
+
+            Review rev = Review(stars, usname, DateTime.now(), meals[j-1], 1);
             if (com != "")
               {
                 rev.addComment(com);
               }
             rev.printReview();
 
-            meals[j].reviews.add(rev);  //RESTAURANT HARDCODED SEE THIS LATER
+            meals[j-1].reviews.add(rev);  //RESTAURANT HARDCODED SEE THIS LATER
 
             row++;
 
