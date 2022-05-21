@@ -105,13 +105,12 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
 
   Widget generateCommentField(BuildContext context, String text, String user) {
 
-    return Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+    return Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
             child: Center(
               child : SizedBox (
                 height: 50,
                 child: Row(
                   children: [
-                    Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
                       Column(
                         children: [
                           Icon(IconData(0xe491, fontFamily: 'MaterialIcons')),
