@@ -10,7 +10,7 @@ class FoodFeupRating extends StatefulWidget{
   FoodFeupRatingState createState() => FoodFeupRatingState();
 }
 
-class FoodFeupRatingState extends State<FoodFeupRating>{
+class FoodFeupRatingState extends State<FoodFeupRating> {
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   static Key _k1 = new GlobalKey();
   String comment;
@@ -19,11 +19,11 @@ class FoodFeupRatingState extends State<FoodFeupRating>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ListView(
-          children: getWidgets(context),
-        ),
-      )
+        body: Center(
+          child: ListView(
+            children: getWidgets(context),
+          ),
+        )
     );
   }
 
@@ -34,31 +34,69 @@ class FoodFeupRatingState extends State<FoodFeupRating>{
   List<Widget> getWidgets(BuildContext context) {
     final List<Widget> widgets = [];
 
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
-    widgets.add(generateText(context, "Toque para avaliar:", TextAlign.center, Colors.black, 16));
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+    widgets.add(generateText(
+        context, "Toque para avaliar:", TextAlign.center, Colors.black, 16));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
     widgets.add(generateRatingBar(context));
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
-    widgets.add(generateText(context, "Deixe um commentário", TextAlign.left, Theme.of(context).accentColor, 20));
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+    widgets.add(
+        generateText(context, "Deixe um commentário", TextAlign.left, Theme
+            .of(context)
+            .accentColor, 20));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
     widgets.add(generateTextInput(context));
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2)));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2)));
     widgets.add(generateCheckBox(context, "Anonimo"));
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2)));
-    widgets.add(Divider(color: Theme.of(context).accentColor, thickness: 4));
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2)));
-    widgets.add(generateText(context, "Todos os comentários:", TextAlign.center, Theme.of(context).accentColor, 26));
-    widgets.add(generateText(context, "(1 comentário)", TextAlign.center, Theme.of(context).accentColor, 12));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2)));
 
-    widgets.add(Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
-    widgets.add(generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(generatePostCommentButtom(context));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
+    widgets.add(Divider(color: Theme
+        .of(context)
+        .accentColor, thickness: 4));
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2)));
+    widgets.add(
+        generateText(context, "Todos os comentários:", TextAlign.center, Theme
+            .of(context)
+            .accentColor, 26));
+    widgets.add(generateText(context, "(1 comentário)", TextAlign.center, Theme
+        .of(context)
+        .accentColor, 12));
 
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
+    widgets.add(
+        generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
 
     return widgets;
   }
+
   Widget generateCommentField(BuildContext, String text, String user) {
-    return SizedBox (
+    return SizedBox(
       height: 40,
       child: Row(
         children: [
@@ -76,7 +114,8 @@ class FoodFeupRatingState extends State<FoodFeupRating>{
     );
   }
 
-  Widget generateText(BuildContext context, String text, TextAlign alignment, Color color, double fontSize) {
+  Widget generateText(BuildContext context, String text, TextAlign alignment,
+      Color color, double fontSize) {
     return Text(text,
         style: TextStyle(
             color: color,
@@ -96,10 +135,11 @@ class FoodFeupRatingState extends State<FoodFeupRating>{
           itemCount: 5,
           itemSize: 50,
           itemPadding: EdgeInsets.symmetric(horizontal: 1.5),
-          itemBuilder: (context, _) => Icon(
-            Icons.star,
-            color: Colors.amber,
-          ),
+          itemBuilder: (context, _) =>
+              Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
           onRatingUpdate: (rating) {
             print(rating);
           },
@@ -118,37 +158,74 @@ class FoodFeupRatingState extends State<FoodFeupRating>{
         key: _k1,
         maxLines: 2,
         decoration: InputDecoration(
-          hintText: 'Clique aqui',
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 1, color: Colors.black),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 1, color: Colors.black),
-            borderRadius: BorderRadius.circular(15),
-          )),
+            hintText: 'Clique aqui',
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.black),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.black),
+              borderRadius: BorderRadius.circular(15),
+            )),
       ),
     );
   }
 
   Widget generateCheckBox(BuildContext context, String text) {
     return Row(
-      children: [
-        Checkbox(
-          value: this.anonymousComment,
-          onChanged: (bool value) {
-            setState(() {
-              this.anonymousComment = value;
-            });
-          },
-        ),
-        generateText(context, "Enviar de forma anónima", TextAlign.left, Colors.black, 16)
-      ]
+        children: [
+          Checkbox(
+            value: this.anonymousComment,
+            onChanged: (bool value) {
+              setState(() {
+                this.anonymousComment = value;
+              });
+            },
+          ),
+          generateText(
+              context, "Enviar de forma anónima", TextAlign.left, Colors.black,
+              16)
+        ]
     );
-
-
   }
 
+  Widget generatePostCommentButtom(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        child: SizedBox(
+            height: 40,
+            width: 300,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  primary: Theme
+                      .of(context)
+                      .accentColor,
+                ),
+                onPressed: () => decoy(),
 
+                child: ListView(
+                  children:
+                  [ Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text("Post",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 20,
+                              overflow: TextOverflow.ellipsis
+                          ),
+                          textAlign: TextAlign.center),
+                    ),
+                  ),
+                  ],
+                )
+            )
+        )
+    );
+  }
 }
 
