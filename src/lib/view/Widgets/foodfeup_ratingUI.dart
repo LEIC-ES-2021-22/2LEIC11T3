@@ -80,7 +80,15 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     widgets.add(
         generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
     widgets.add(
-        generateCommentField(context, "Comentário bonito aqui asjsafsak fsamfsamfsafa fasmfamfas fsamfsamfasfsa ", "upxxxxxxxxx"));
+        generateCommentField(context, "It is a long established fact that a reader"
+            " will be distracted by the readable content of a page when looking at "
+            "its layout. The point of using Lorem Ipsum is that it has a more-or-less "
+            "normal distribution of letters, as opposed to using 'Content here, content "
+            "here', making it look like readable English. Many desktop publishing "
+            "packages and web page editors now use Lorem Ipsum as their default model"
+            " text, and a search for 'lorem ipsum' will uncover many web sites still in their"
+            " infancy. Various versions have evolved over the years, sometimes by accident, "
+            "sometimes on purpose (injected humour and the like). ", "upxxxxxxxxx"));
     widgets.add(
         generateCommentField(context, "Comentário bonito aqui", "upxxxxxxxxx"));
     widgets.add(
@@ -111,7 +119,9 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
                         ],
                     ),
                     VerticalDivider(color: Colors.grey, thickness: 4),
-                    generateText(context, text, TextAlign.left, Colors.black, 12)
+                    Expanded( child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                        child: generateText(context, text, TextAlign.left, Colors.black, 12)))
         ],
       ),
     )
@@ -127,8 +137,10 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
               style: TextStyle(
                   color: color,
                   fontWeight: FontWeight.w400,
-                   fontSize: fontSize),
-              textAlign: alignment)
+                   fontSize: fontSize
+              ),
+              textAlign: alignment,
+              overflow: TextOverflow.visible)
     );
   }
 
