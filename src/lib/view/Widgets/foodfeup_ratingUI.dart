@@ -108,7 +108,7 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     return Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: Center(
               child : SizedBox (
-                height: 40,
+                height: 50,
                 child: Row(
                   children: [
                     Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
