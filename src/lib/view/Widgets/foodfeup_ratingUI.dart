@@ -2,6 +2,11 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:uni/model/entities/review.dart';
+import 'package:uni/model/food_feup_establishment_page_model.dart';
+import 'package:uni/model/utils/day_of_week.dart';
+
+import '../../model/entities/meal.dart';
 
 class FoodFeupRating extends StatefulWidget{
   const FoodFeupRating({Key key}) : super(key: key);
@@ -13,6 +18,8 @@ class FoodFeupRating extends StatefulWidget{
 class FoodFeupRatingState extends State<FoodFeupRating> {
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   static Key _k1 = new GlobalKey();
+  double rate;
+  String username;
   String comment;
   bool anonymousComment = false;
 
@@ -26,6 +33,24 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
         )
     );
   }
+
+  bool addToSheets()
+  {
+
+    print(comment);
+    print(username);
+    print(rate);
+
+    Review rev = Review(rate, username, DateTime.now(), Meal("Carne", "Carne com carne", DayOfWeek.friday, DateTime.now()), 1);
+    //CHANGE MEAL AND RESTAURANT ATTRIBUTES LATER
+
+    //FoodFeupEstablishmentPage.addReview(rev);
+
+
+
+
+  }
+
 
   bool decoy() {
     return false;
@@ -104,7 +129,7 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
   }
 
   Widget generateCommentField(BuildContext context, String text, String user) {
-
+    username = user;    //save the username
     return Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
             child: Center(
               child : SizedBox (
@@ -121,11 +146,14 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
                     Expanded( child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                         child: generateText(context, text, TextAlign.left, Colors.black, 12)))
+
         ],
       ),
     )
     )
     );
+
+
   }
 
 
@@ -160,18 +188,24 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
                 color: Colors.amber,
               ),
           onRatingUpdate: (rating) {
+            rate = rating;
             print(rating);
           },
         ));
   }
 
   Widget generateTextInput(BuildContext context) {
+    comment = "";
     return Theme(
       data: ThemeData(
         primaryColor: Colors.black,
         primaryColorDark: Colors.black,
       ),
+
       child: TextField(
+
+        onChanged: (text){comment = text;},
+
         textAlignVertical: TextAlignVertical.top,
         cursorColor: Colors.black,
         key: _k1,
@@ -187,6 +221,7 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
               borderRadius: BorderRadius.circular(15),
             )),
       ),
+
     );
   }
 
@@ -223,7 +258,7 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
                       .of(context)
                       .accentColor,
                 ),
-                onPressed: () => decoy(),
+                onPressed: () => addToSheets(),
 
                 child: ListView(
                   children:

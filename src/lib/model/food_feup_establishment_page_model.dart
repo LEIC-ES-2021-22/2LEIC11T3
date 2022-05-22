@@ -13,6 +13,43 @@ class FoodFeupEstablishmentPage extends StatefulWidget {
 
   @override
   _FoodFeupEstablishmentPageState createState() => _FoodFeupEstablishmentPageState();
+
+  //SEE THIS
+  /*bool addReview(Review r) async {
+
+    String text = r.toString();
+
+    final gsheets = GSheets(Constants.credentials);
+    final ss = gsheets.spreadsheet(Constants.spreadsheetId);
+    Worksheet sheet = ss.worksheetByTitle(r.meal.dayOfWeek.name);
+
+    int line;
+    switch(r.meal.type)
+    {
+      case "Carne":
+        line = 1;
+        break;
+      case "Peixe":
+        line = 2;
+        break;
+      case "Sopa":
+        line = 3;
+        break;
+      case "Dieta":
+        line = 4;
+        break;
+      case "Vegetariano":
+        line = 5;
+        break;
+      default:
+        break;
+    }
+
+   int pos = sheet.columnCount;
+
+    sheet.values.insertValue(text, column: pos, row: line);
+
+  } */
 }
 
 class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
@@ -40,99 +77,105 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     final gsheets = GSheets(Constants.credentials);
     // fetch spreadsheet by its id
     final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
-    // get worksheet by its title
-    final sheet0 = await ss.worksheetByTitle('Segunda');
-    final sheet1 = await ss.worksheetByTitle('Terça');
-    final sheet2 = await ss.worksheetByTitle('Quarta');
-    final sheet3 = await ss.worksheetByTitle('Quinta');
-    final sheet4 = await ss.worksheetByTitle('Sexta');
-    final sheet5 = await ss.worksheetByTitle('Sábado');
-    final sheet6 = await ss.worksheetByTitle('Domingo');
-    List<Worksheet> week;
-    week.add(sheet0);
-    week.add(sheet1);
-    week.add(sheet2);
-    week.add(sheet3);
-    week.add(sheet4);
-    week.add(sheet5);
-    week.add(sheet6);
 
-    print("SADSDASKFAS\n\n\n\ ");
+    Worksheet sheet;
 
     for (int i = 0; i < daysOfTheWeek.length; i++) {
       List<Meal> meals = [];
+      // get worksheet by its title
+      switch(i){
+        case 0:
+          sheet = await ss.worksheetByTitle('Segunda-feira');
+          break;
+        case 1:
+          sheet = await ss.worksheetByTitle('Terça-feira');
+          break;
+        case 2:
+          sheet = await ss.worksheetByTitle('Quarta-feira');
+          break;
+        case 3:
+          sheet = await ss.worksheetByTitle('Quinta-feira');
+          break;
+        case 4:
+          sheet = await ss.worksheetByTitle('Sexta-feira');
+          break;
+        case 5:
+          sheet = await ss.worksheetByTitle('Sábado');
+          break;
+        case 6:
+          sheet = await ss.worksheetByTitle('Domingo');
+          break;
+        default:
+          break;
+      }
       for(int j= 1; j < 6; j++){
-        List<String> line = await week[i].values.row(j);
+        List<String> line = await sheet.values.row(j);
         print(line);
         meals.add(Meal(line[0], line[1], DayOfWeek.monday, DateTime.now()));
         int row = 4;
         while (row < line.length && line[row].isNotEmpty)
-          {
-            print("Im inside the loop");
-            int stars;
-            String usname;
-            String com;
-            int part = 0;
-            String text = "";
-            for (int k = 0; k < line[row].length; k++){
-              print("For number: $k");
-                if (part == 3)
+        {
+          print("Im inside the loop");
+          double stars;
+          String usname;
+          String com;
+          int part = 0;
+          String text = "";
+          for (int k = 0; k < line[row].length; k++){
+            print("For number: $k");
+            if (part == 3)
+              break;
+
+            if (line[row][k] == "&")
+            {
+              switch(part){
+                case 0:
+                  stars = double.parse(text);
+                  text = "";
                   break;
-
-                if (line[row][k] == "&")
-                  {
-                    switch(part){
-                      case 0:
-                        stars = int.parse(text);
-                        text = "";
-                        break;
-                      case 1:
-                        usname = text;
-                        text = "";
-                        break;
-                      case 2:
-                        com = text;
-                        text = "";
-                        break;
-                      default:
-                        break;
-                    }
-
-                    part++;
-
-                  }
-                else{
-                  text += line[row][k];
-                }
+                case 1:
+                  usname = text;
+                  text = "";
+                  break;
+                case 2:
+                  com = text;
+                  text = "";
+                  break;
+                default:
+                  break;
               }
 
-            switch(part){
-              case 1:
-                usname = text;
-                break;
-              case 2:
-                com = text;
-                break;
-              default:
-                break;
+              part++;
+
             }
-
-
-
-            Review rev = Review(stars, usname, DateTime.now(), meals[j-1], 1);
-            if (com != "")
-              {
-                rev.addComment(com);
-              }
-            rev.printReview();
-
-            meals[j-1].reviews.add(rev);  //RESTAURANT HARDCODED SEE THIS LATER
-
-            row++;
-
+            else{
+              text += line[row][k];
+            }
           }
 
+          switch(part){
+            case 1:
+              usname = text;
+              break;
+            case 2:
+              com = text;
+              break;
+            default:
+              break;
+          }
 
+          Review rev = Review(stars, usname, DateTime.now(), meals[j-1], 1);
+          if (com != "")
+          {
+            rev.addComment(com);
+          }
+          rev.printReview();
+
+          meals[j-1].reviews.add(rev);  //RESTAURANT HARDCODED SEE THIS LATER
+
+          row++;
+
+        }
 
       }
       aggMeals.add(meals);
@@ -159,14 +202,13 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
   Widget LoadingScreen() {
 
     return Center(
-      child: SizedBox(
-        width: 60,
-        height: 60,
-        child: CircularProgressIndicator(),
-      )
+        child: SizedBox(
+          width: 60,
+          height: 60,
+          child: CircularProgressIndicator(),
+        )
     );
   }
-
 
   @override
   Widget getBody(BuildContext context) {
