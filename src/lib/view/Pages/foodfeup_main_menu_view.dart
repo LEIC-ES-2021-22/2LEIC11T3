@@ -10,7 +10,6 @@ class FoodFeupMainMenuPageView extends StatefulWidget {
   State<StatefulWidget> createState() => FoodFeupMainMenuPageViewState();
 }
 
-/// Manages the 'Bugs and sugestions' section of the app.
 class FoodFeupMainMenuPageViewState extends SecondaryPageViewState {
 
   @override
