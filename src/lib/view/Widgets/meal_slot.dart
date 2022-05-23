@@ -20,13 +20,13 @@ class MealSlot extends StatelessWidget{
   double roundRating(){
     if(rating==null) this.rating = 0;
     double remainder = rating.remainder(1);
-    print("rating is $rating remainder $remainder");
+
 
     if(remainder < 0.25){
       return rating.floorToDouble();
     }
-    if(remainder > 0.75){
-      return ( (rating) as int ) + 0.5;//PEAK code
+    if(remainder < 0.75){
+      return rating.floorToDouble()+0.5;
     }
 
     return rating.ceilToDouble();
@@ -67,8 +67,6 @@ class MealSlot extends StatelessWidget{
         "(20)",
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
         TextAlign.center);
-
-
     return [
       Column(
           children:<Widget>[

@@ -81,7 +81,7 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
       aggMeals.add(meals);
     }
     */
-    check();
+    await check();
 
     return sheet;
   }
@@ -103,26 +103,17 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
         for(int i = 0; i < sheetFood.length; i++){
           if(meal.name == sheetFood[i] && restaurantName == sheetRestaurants[i]){
             isPresent = true;
-            meal.rating = (await sheet.values.value(column: 4, row: i + 1)) as double;
+            meal.rating = double.parse(await sheet.values.value(column: 4, row: i + 1)) ;
             break;
           }
         }
         if(!isPresent){
           lines = lines + 1;
-          meal.rating = (await sheet.values.value(column: 4, row:  lines)) as double;
+          meal.rating = 0;
           sheet.values.insertRow( lines, [restaurantName, meal.name,meal.type,0] );
         }
       }
     }
-    for(List daylist in aggMeals){
-      for(Meal meal in daylist){
-        print("-----------");
-        print(meal.rating);
-        print("-----------");
-      }
-    }
-
-
   }
 
   @override
