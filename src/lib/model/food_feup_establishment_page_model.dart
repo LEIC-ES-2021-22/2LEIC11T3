@@ -1,8 +1,4 @@
-import 'package:tuple/tuple.dart';
-import 'package:uni/model/app_state.dart';
-import 'package:uni/model/entities/lecture.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:uni/model/entities/meal.dart';
 import 'package:uni/model/utils/day_of_week.dart';
 import 'package:gsheets/gsheets.dart';
@@ -61,7 +57,7 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     // fetch spreadsheet by its id
     final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
     // get worksheet by its title
-    final sheet = await ss.worksheetByTitle('Sheet1');
+    final sheet = await ss.worksheetByTitle('monday');
 
     //print("SADSDASKFAS\n\n\n\ ");
     for(int i = 0; i < getCurrDayInt()-1; i++) {
@@ -85,13 +81,36 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
       aggMeals.add(meals);
     }
     */
-    for(int i = 0; i < aggMeals.length; i++) {
-      for(Meal m in aggMeals[i]){
-        print(m.name + " " + m.type + " " + m.dayOfWeek.toString() + " " + m.date.toString());
-      }
-      print("-------");
-    }
+    check();
+
     return sheet;
+  }
+
+  Future check() async{
+    final gsheets = GSheets(Constants.credentials);
+    // fetch spreadsheet by its id
+    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
+
+    final sheet = await ss.worksheetByTitle('Sheet2');
+
+    List<String> sheetRestaurants = await sheet.values.column(1);
+    List<String> sheetFood = await sheet.values.column(2);
+    int lines = sheetRestaurants.length;
+
+    for(List daylist in aggMeals){
+      for(Meal meal in daylist){
+        bool isPresent = false;
+        for(int i = 0; i < sheetFood.length; i++){
+          if(meal.name == sheetFood[i] && restaurantName == sheetRestaurants[i]){
+            isPresent = true;
+            break;
+          }
+        }
+        if(!isPresent){
+          sheet.values.insertRow( (lines = lines + 1), [restaurantName, meal.name,meal.type,0] );
+        }
+      }
+    }
   }
 
   @override
