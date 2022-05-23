@@ -2,9 +2,11 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:gsheets/gsheets.dart';
 import 'package:uni/model/entities/review.dart';
 import 'package:uni/model/food_feup_establishment_page_model.dart';
 import 'package:uni/model/utils/day_of_week.dart';
+import 'package:uni/utils/constants.dart' as Constants;
 
 import '../../model/entities/meal.dart';
 
@@ -41,19 +43,46 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     print(username);
     print(rate);
 
-    Review rev = Review(rate, username, DateTime.now(), Meal("Carne", "Carne com carne", DayOfWeek.friday, DateTime.now()), 1);
+    Review rev = Review(rate, username, DateTime.now(), Meal("Carne", "Carne com carne",
+        DayOfWeek.friday, DateTime.now()), 1);
+    rev.addComment(comment);
+
     //CHANGE MEAL AND RESTAURANT ATTRIBUTES LATER
-
-    //FoodFeupEstablishmentPage.addReview(rev);
-
-
-
-
+    print("line51");
+    addReview(rev);
   }
+  //SEE THIS
+  Future<bool> addReview(Review r) async {
 
+    String text = r.toString();
 
-  bool decoy() {
-    return false;
+    final gsheets = GSheets(Constants.credentials);
+    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
+    Worksheet sheet = ss.worksheetByTitle(r.meal.dayOfWeek.name);
+
+    int line;
+    switch(r.meal.type)
+    {
+      case "Carne":
+        line = 1;
+        break;
+      case "Peixe":
+        line = 2;
+        break;
+      case "Sopa":
+        line = 3;
+        break;
+      case "Dieta":
+        line = 4;
+        break;
+      case "Vegetariano":
+        line = 5;
+        break;
+      default:
+        break;
+    }
+    List<String> row = await sheet.values.row(line);
+    await sheet.values.insertValue(text, column: row.length, row: line);
   }
 
   List<Widget> getWidgets(BuildContext context) {

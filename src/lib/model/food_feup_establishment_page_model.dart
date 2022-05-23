@@ -13,43 +13,6 @@ class FoodFeupEstablishmentPage extends StatefulWidget {
 
   @override
   _FoodFeupEstablishmentPageState createState() => _FoodFeupEstablishmentPageState();
-
-  //SEE THIS
-  /*bool addReview(Review r) async {
-
-    String text = r.toString();
-
-    final gsheets = GSheets(Constants.credentials);
-    final ss = gsheets.spreadsheet(Constants.spreadsheetId);
-    Worksheet sheet = ss.worksheetByTitle(r.meal.dayOfWeek.name);
-
-    int line;
-    switch(r.meal.type)
-    {
-      case "Carne":
-        line = 1;
-        break;
-      case "Peixe":
-        line = 2;
-        break;
-      case "Sopa":
-        line = 3;
-        break;
-      case "Dieta":
-        line = 4;
-        break;
-      case "Vegetariano":
-        line = 5;
-        break;
-      default:
-        break;
-    }
-
-   int pos = sheet.columnCount;
-
-    sheet.values.insertValue(text, column: pos, row: line);
-
-  } */
 }
 
 class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
