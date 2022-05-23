@@ -6,6 +6,7 @@ class Meal{
   final String name;
   final DayOfWeek dayOfWeek;
   final DateTime date;
+  double rating;
   Meal(this.type, this.name, this.dayOfWeek, this.date);
 
   Map<String, dynamic> toMap(restaurantId) {

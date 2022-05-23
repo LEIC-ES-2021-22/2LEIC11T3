@@ -91,10 +91,10 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     // fetch spreadsheet by its id
     final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
 
-    final sheet = await ss.worksheetByTitle('Sheet2');
+    final sheet = ss.worksheetByTitle('Sheet2');
 
-    List<String> sheetRestaurants = await sheet.values.column(1);
-    List<String> sheetFood = await sheet.values.column(2);
+    final List<String> sheetRestaurants = await sheet.values.column(1);
+    final List<String> sheetFood = await sheet.values.column(2);
     int lines = sheetRestaurants.length;
 
     for(List daylist in aggMeals){
@@ -103,14 +103,26 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
         for(int i = 0; i < sheetFood.length; i++){
           if(meal.name == sheetFood[i] && restaurantName == sheetRestaurants[i]){
             isPresent = true;
+            meal.rating = (await sheet.values.value(column: 4, row: i + 1)) as double;
             break;
           }
         }
         if(!isPresent){
-          sheet.values.insertRow( (lines = lines + 1), [restaurantName, meal.name,meal.type,0] );
+          lines = lines + 1;
+          meal.rating = (await sheet.values.value(column: 4, row:  lines)) as double;
+          sheet.values.insertRow( lines, [restaurantName, meal.name,meal.type,0] );
         }
       }
     }
+    for(List daylist in aggMeals){
+      for(Meal meal in daylist){
+        print("-----------");
+        print(meal.rating);
+        print("-----------");
+      }
+    }
+
+
   }
 
   @override
