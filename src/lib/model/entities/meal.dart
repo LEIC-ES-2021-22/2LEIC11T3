@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:uni/model/entities/review.dart';
 import 'package:uni/model/utils/day_of_week.dart';
 
 class Meal{
@@ -7,7 +8,14 @@ class Meal{
   final DayOfWeek dayOfWeek;
   final DateTime date;
   double rating;
-  Meal(this.type, this.name, this.dayOfWeek, this.date);
+
+  List<Review> reviews;
+  Meal(this.type, this.name, this.dayOfWeek, this.date)
+  {
+    reviews = [];
+  }
+
+
 
   Map<String, dynamic> toMap(restaurantId) {
     final DateFormat format = DateFormat('d-M-y');

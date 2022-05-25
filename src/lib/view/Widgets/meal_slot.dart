@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:uni/view/Widgets/row_container.dart';
 
 class MealSlot extends StatelessWidget{
@@ -103,7 +104,7 @@ class MealSlot extends StatelessWidget{
       Expanded(child: mealNameTextField),
       Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
-      createReviewButton()
+      createReviewButton(context)
     ];
   }
 
@@ -118,11 +119,15 @@ class MealSlot extends StatelessWidget{
     );
   }
 
-  bool decoy(){
-    return false;
+  bool transitionToRatingPage(BuildContext context){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FoodFeupRatingView()));
+
+    return true;
   }
 
-  Widget createReviewButton(){
+  Widget createReviewButton(BuildContext context){
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
       child: SizedBox(
@@ -138,7 +143,7 @@ class MealSlot extends StatelessWidget{
               ),
               primary: Colors.red,
             ),
-            onPressed: decoy,//TODO change to real function
+            onPressed: () => transitionToRatingPage(context),
 
 
           )
