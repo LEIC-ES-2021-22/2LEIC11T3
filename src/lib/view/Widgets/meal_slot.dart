@@ -4,6 +4,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:uni/view/Widgets/row_container.dart';
 
+import 'package:uni/view/Pages/foodfeup_rating_view.dart';
+
 class MealSlot extends StatelessWidget{
   final String type;
   final String name;
