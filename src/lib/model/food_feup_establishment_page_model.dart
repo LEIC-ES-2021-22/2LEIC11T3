@@ -9,14 +9,31 @@ import 'package:uni/utils/constants.dart' as Constants;
 import 'entities/review.dart';
 
 class FoodFeupEstablishmentPage extends StatefulWidget {
-  const FoodFeupEstablishmentPage({Key key}) : super(key: key);
+  const FoodFeupEstablishmentPage({Key key,
+      @required this.restaurantName,
+      @required this.meals}) :
+        super(key: key);
+
+  final String restaurantName;
+  final Map<DayOfWeek, List<Meal>> meals;
 
   @override
-  _FoodFeupEstablishmentPageState createState() => _FoodFeupEstablishmentPageState();
+  _FoodFeupEstablishmentPageState createState() => _FoodFeupEstablishmentPageState(
+      restaurantName: this.restaurantName,
+      meals: this.meals
+  );
 }
 
 class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     with SingleTickerProviderStateMixin {
+  _FoodFeupEstablishmentPageState(
+      {Key key,
+        @required this.restaurantName,
+        @required this.meals
+  });
+  final String restaurantName;
+  final Map<DayOfWeek, List<Meal>> meals;
+
   final int weekDay = DateTime
       .now()
       .weekday;
@@ -41,29 +58,26 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
     // fetch spreadsheet by its id
     final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
     // get worksheet by its title
-    final sheet0 = await ss.worksheetByTitle('Segunda');
-    final sheet1 = await ss.worksheetByTitle('Terça');
-    final sheet2 = await ss.worksheetByTitle('Quarta');
-    final sheet3 = await ss.worksheetByTitle('Quinta');
-    final sheet4 = await ss.worksheetByTitle('Sexta');
-    final sheet5 = await ss.worksheetByTitle('Sábado');
-    final sheet6 = await ss.worksheetByTitle('Domingo');
-    List<Worksheet> week;
-    week.add(sheet0);
-    week.add(sheet1);
-    week.add(sheet2);
-    week.add(sheet3);
-    week.add(sheet4);
-    week.add(sheet5);
-    week.add(sheet6);
 
-    print("SADSDASKFAS\n\n\n\ ");
+    final sheet = await ss.worksheetByTitle('monday');
 
+    //print("SADSDASKFAS\n\n\n\ ");
+    for(int i = 0; i < getCurrDayInt()-1; i++) {
+      aggMeals.add([]);
+    }
+    for(DayOfWeek day in meals.keys) {
+      aggMeals.add(meals[day]);
+    }
+    while(aggMeals.length < 7) {
+      aggMeals.add([]);
+    }
+
+    /*
     for (int i = 0; i < daysOfTheWeek.length; i++) {
       List<Meal> meals = [];
       for(int j= 1; j < 6; j++){
-        List<String> line = await week[i].values.row(j);
-        print(line);
+        List<String> line = await sheet.values.row(j);
+        //print(line);
         meals.add(Meal(line[0], line[1], DayOfWeek.monday, DateTime.now()));
         int row = 4;
         while (row < line.length && line[row].isNotEmpty)
@@ -137,8 +151,40 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
       }
       aggMeals.add(meals);
     }
+    */
+    await check();
 
     return sheet;
+  }
+
+  Future check() async{
+    final gsheets = GSheets(Constants.credentials);
+    // fetch spreadsheet by its id
+    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
+
+    final sheet = ss.worksheetByTitle('Sheet2');
+
+    final List<String> sheetRestaurants = await sheet.values.column(1);
+    final List<String> sheetFood = await sheet.values.column(2);
+    int lines = sheetRestaurants.length;
+
+    for(List daylist in aggMeals){
+      for(Meal meal in daylist){
+        bool isPresent = false;
+        for(int i = 0; i < sheetFood.length; i++){
+          if(meal.name == sheetFood[i] && restaurantName == sheetRestaurants[i]){
+            isPresent = true;
+            meal.rating = double.parse(await sheet.values.value(column: 4, row: i + 1)) ;
+            break;
+          }
+        }
+        if(!isPresent){
+          lines = lines + 1;
+          meal.rating = 0;
+          sheet.values.insertRow( lines, [restaurantName, meal.name,meal.type,0] );
+        }
+      }
+    }
   }
 
   @override
@@ -166,7 +212,6 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
       )
     );
   }
-
 
   @override
   Widget getBody(BuildContext context) {

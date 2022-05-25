@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:uni/model/utils/day_of_week.dart';
 import 'package:uni/view/Widgets/page_title.dart';
 import 'package:uni/view/Widgets/request_dependent_widget_builder.dart';
 
@@ -70,10 +71,13 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
     final List<Widget> mealContent = <Widget>[];
     for (int i = 0; i < meals.length; i++) {
       final Meal meal = meals[i];
+      /*print("-----------");
+      print(meal.rating);
+      print("-----------");*/
       mealContent.add(MealSlot(
         type: meal.type,
         name: meal.name,
-        rating: 0,
+        rating: meal.rating,
         ratingQuantity: 0,
       ));
     }
@@ -102,7 +106,7 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
       content: aggMeals[day],
       contentChecker: aggMeals[day].isNotEmpty,
       onNullContent:
-      Center(child: Text('Não possui aulas à ' + daysOfTheWeek[day] + '.')),
+      Center(child: Text('Não ha informação disponivel sobre refeições')),
       index: day,
     );
   }

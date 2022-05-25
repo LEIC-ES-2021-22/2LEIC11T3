@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:uni/view/Pages/foodfeup_rating_view.dart';
-import 'package:uni/view/Widgets/foodfeup_ratingUI.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:uni/view/Widgets/row_container.dart';
 
 class MealSlot extends StatelessWidget{
   final String type;
   final String name;
-  final int rating;
+  double rating;
   final int ratingQuantity;
 
   MealSlot({
@@ -17,6 +17,21 @@ class MealSlot extends StatelessWidget{
     this.rating,
     this.ratingQuantity,
   }): super(key: key);
+
+  double roundRating(){
+    if(rating==null) this.rating = 0;
+    double remainder = rating.remainder(1);
+
+
+    if(remainder < 0.25){
+      return rating.floorToDouble();
+    }
+    if(remainder < 0.75){
+      return rating.floorToDouble()+0.5;
+    }
+
+    return rating.ceilToDouble();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +64,10 @@ class MealSlot extends StatelessWidget{
         this.name,
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
         TextAlign.center);
-    final ratingValueTextField = createTextField(
-        "5",
-        Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
-        TextAlign.center);
     final ratingQuantityTextField = createTextField(
         "(20)",
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
         TextAlign.center);
-
-
     return [
       Column(
           children:<Widget>[
@@ -71,7 +80,20 @@ class MealSlot extends StatelessWidget{
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)),
-                ratingValueTextField,
+                RatingBar.builder(
+                  initialRating: roundRating(),
+                  glow: false,
+                  direction: Axis.horizontal,
+                  itemCount: 5,
+                  itemSize: 15,
+                  ignoreGestures: true,
+                  allowHalfRating: true,
+                  itemBuilder: (context, _) =>
+                      Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                ),
                 ratingQuantityTextField,
               ],
             )

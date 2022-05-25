@@ -7,12 +7,13 @@ class Meal{
   final String name;
   final DayOfWeek dayOfWeek;
   final DateTime date;
+  double rating;
+
   List<Review> reviews;
   Meal(this.type, this.name, this.dayOfWeek, this.date)
   {
     reviews = [];
   }
-
 
 
 
