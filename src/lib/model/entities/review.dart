@@ -3,21 +3,21 @@ import 'package:uni/model/utils/day_of_week.dart';
 import 'package:uni/model/entities/meal.dart';
 
 class Review{
-  int stars;
-  Meal meal;
-  int rest_id;
+  double stars;
+  String meal;
+  String rest_name;
   String username;
-  DateTime date;
   String comment;
 
-  Review(int st, String un, DateTime d, Meal m, int rid){
+  Review(double st, String un, String m, String rn){
     this.stars = st;
     this.username = un;
-    this.date = d;
     this.meal = m;
-    this.rest_id = rid;
+    this.rest_name = rn;
     this.comment = "";
+    print("contrutor");
   }
+
 
 
 
@@ -26,9 +26,11 @@ class Review{
     this.comment = c;
   }
 
-  void printReview()
+    @override
+
+  String toString()
   {
-    print("Stars: $stars , Username: $username , Comment: $comment ");
+    return ("Stars: $stars , Username: $username , Comment: $comment ");
 
   }
 }

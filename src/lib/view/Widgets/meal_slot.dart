@@ -10,12 +10,14 @@ class MealSlot extends StatelessWidget{
   final String type;
   final String name;
   double rating;
+  final String restaurant;
   final int ratingQuantity;
 
   MealSlot({
     Key key,
     @required this.type,
     @required this.name,
+    @required this.restaurant,
     this.rating,
     this.ratingQuantity,
   }): super(key: key);
