@@ -136,6 +136,7 @@ class MealSlot extends StatelessWidget{
           height: 30,
           width: 30,
           child: ElevatedButton(
+            key: Key("review_button_$type"),
             child: Center(
               child: Icon(Icons.star,color: Colors.white,size: 10,),
             ),
@@ -146,8 +147,6 @@ class MealSlot extends StatelessWidget{
               primary: Colors.red,
             ),
             onPressed: () => transitionToRatingPage(context),
-
-
           )
       ),
     );
