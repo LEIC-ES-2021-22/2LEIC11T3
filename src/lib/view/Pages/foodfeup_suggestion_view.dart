@@ -38,6 +38,9 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
       child: Column(
         children: [
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
+          Text("Recomendação",
+            style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30),),
+          Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
           createDropdownButton(Theme.of(context).accentColor),
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
           Text(establishment,
