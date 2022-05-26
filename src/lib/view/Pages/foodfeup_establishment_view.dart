@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
-import 'package:uni/model/utils/day_of_week.dart';
 import 'package:uni/view/Widgets/page_title.dart';
 import 'package:uni/view/Widgets/request_dependent_widget_builder.dart';
+import 'package:uni/view/Widgets/meal_slot.dart';
+import 'package:uni/model/entities/meal.dart';
 
-import '../../model/entities/meal.dart';
-import '../Widgets/meal_slot.dart';
 
 class FoodFeupEstablishmentPageView extends StatelessWidget {
   FoodFeupEstablishmentPageView(

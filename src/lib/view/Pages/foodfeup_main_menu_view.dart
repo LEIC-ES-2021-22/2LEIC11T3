@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uni/view/Pages/secondary_page_view.dart';
 import 'package:uni/view/Widgets/bug_report_form.dart';
+import 'package:uni/view/Widgets/foodfeup_main_menu.dart';
 
-import '../Widgets/foodfeup_main_menu.dart';
 
 class FoodFeupMainMenuPageView extends StatefulWidget {
   @override
