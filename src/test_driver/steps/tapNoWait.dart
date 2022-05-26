@@ -11,6 +11,6 @@ StepDefinitionGeneric TapNoWaitStep() {
       await FlutterDriverUtils.tap(context.world.driver, locator);
 
     },configuration: StepDefinitionConfiguration()
-    ..timeout = const Duration(seconds: 30),
+    ..timeout = const Duration(minutes: 2),
   );
 }

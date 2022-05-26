@@ -11,15 +11,15 @@ Feature: Open main menu
     Given I am logged in
     When I open the drawer
     And I tap the "key_Food FEUP" button
-    And I tap the "establishment_button_Cantina" button and I dont wait
+    And I tap the "establishment_button_Grill" button and I dont wait
     Then I expect the widget 'establishment_menu' to be present within 30 seconds
 
   Scenario: Be able to rate a meal
     Given I am logged in
     When I open the drawer
     And I tap the "key_Food FEUP" button
-    And I tap the "establishment_button_Cantina" button and I dont wait
-    And I tap the "review_button_$Carne" button and i dont wait
+    And I tap the "establishment_button_Grill" button and I dont wait
+    And I tap the "review_button_Carne" button and I dont wait
     Then I expect the text 'Deixe um commentário' to be present
 
   Scenario: Be able to access suggestion page
