@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:uni/view/Widgets/page_title.dart';
 import 'package:uni/view/Widgets/request_dependent_widget_builder.dart';
+import 'package:uni/view/Widgets/meal_slot.dart';
+import 'package:uni/model/entities/meal.dart';
 
-import '../../model/entities/meal.dart';
-import '../Widgets/meal_slot.dart';
 
 class FoodFeupEstablishmentPageView extends StatelessWidget {
   FoodFeupEstablishmentPageView(
@@ -28,7 +27,7 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: <Widget>[
-          PageTitle(name: 'Comida'),
+          PageTitle(key: Key("establishment_menu"),name: 'Comida'),
           TabBar(
             controller: tabController,
             isScrollable: true,
@@ -70,10 +69,13 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
     final List<Widget> mealContent = <Widget>[];
     for (int i = 0; i < meals.length; i++) {
       final Meal meal = meals[i];
+      /*print("-----------");
+      print(meal.rating);
+      print("-----------");*/
       mealContent.add(MealSlot(
         type: meal.type,
         name: meal.name,
-        rating: 0,
+        rating: meal.rating,
         ratingQuantity: 0,
       ));
     }
@@ -102,7 +104,7 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
       content: aggMeals[day],
       contentChecker: aggMeals[day].isNotEmpty,
       onNullContent:
-      Center(child: Text('Não possui aulas à ' + daysOfTheWeek[day] + '.')),
+      Center(child: Text('Não ha informação disponivel sobre refeições')),
       index: day,
     );
   }
