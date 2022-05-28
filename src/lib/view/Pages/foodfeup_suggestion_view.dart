@@ -1,12 +1,16 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:uni/view/Widgets/page_title.dart';
 
-class FoodFeupSuggestionPageView extends StatelessWidget {
-  FoodFeupSuggestionPageView({
+class FoodFeupSuggestion extends StatefulWidget{
+  const FoodFeupSuggestion({Key key}) : super(key: key);
+
+  @override
+  FoodFeupSuggestionState createState() => FoodFeupSuggestionState();
+}
+
+class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
+  FoodFeupSuggestionState({
     Key key,
-    @required this.options,
+    //this.options,
     this.mealType,
     this.mealRating,
     this.mealRatingQuant,
@@ -14,7 +18,7 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
     this.establishment
     });
 
-  final List<String> options;
+  final List<String> options = ["Indiferente","Carne","Peixe","Vegetariano","Dieta","Sopa"];
   String dropdownValue;
   String mealType;
   int mealRating;
@@ -24,14 +28,12 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-    dropdownValue = options[0];//TODO: read these from somewhere
+    //dropdownValue = options[1];//TODO: make this change
     establishment = "Cantina almoço";
     mealType = "Vegetariano";
     mealRating = 4;
     mealRatingQuant = "23";
     mealName = "Jardineira de soja (batata,ervilhas e cenoura)";
-
-
 
     return (SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -78,7 +80,9 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
           color: color,
         ),
         onChanged: (String newValue){//TODO:Make this update the page content
-          dropdownValue = newValue;
+          setState(() {
+            dropdownValue = newValue;
+          });
         },
         items: options.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
@@ -115,5 +119,6 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
   bool decoy(){
     return false;
   }
+
 
   }

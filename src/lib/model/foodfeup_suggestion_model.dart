@@ -17,7 +17,7 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
       .weekday;
 
 
-  final List<String> options = [
+  final List<String> options = [//TODO: why is this here?
     'indiferente',
     'Carne',
     'Peixe',
@@ -51,9 +51,6 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
 
   @override
   Widget getBody(BuildContext context) {
-      return FoodFeupSuggestionPageView(
-          options: options,
-
-      );
+      return FoodFeupSuggestion();
   }
 }
