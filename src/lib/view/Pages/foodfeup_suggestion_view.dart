@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gsheets/gsheets.dart';
+import 'package:uni/utils/constants.dart' as Constants;
 
 class FoodFeupSuggestion extends StatefulWidget{
   const FoodFeupSuggestion({Key key}) : super(key: key);
@@ -11,11 +13,12 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
   FoodFeupSuggestionState({
     Key key,
     //this.options,
-    this.mealType,
-    this.mealRating,
-    this.mealRatingQuant,
-    this.mealName,
-    this.establishment
+    this.mealType = "Vegetariano",
+    this.mealRating = 4,
+    this.mealRatingQuant = "23",
+    this.mealName = "Jardineira de soja (batata,ervilhas e cenoura)",
+    this.establishment = "Cantina almoço",
+    this.dropdownValue = 'Indiferente'
     });
 
   final List<String> options = ["Indiferente","Carne","Peixe","Vegetariano","Dieta","Sopa"];
@@ -28,12 +31,11 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
 
   @override
   Widget build(BuildContext context){
-    //dropdownValue = options[1];//TODO: make this change
-    establishment = "Cantina almoço";
+    /*establishment = "Cantina almoço";
     mealType = "Vegetariano";
     mealRating = 4;
     mealRatingQuant = "23";
-    mealName = "Jardineira de soja (batata,ervilhas e cenoura)";
+    mealName = "Jardineira de soja (batata,ervilhas e cenoura)";*/
 
     return (SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -81,6 +83,8 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
         ),
         onChanged: (String newValue){//TODO:Make this update the page content
           setState(() {
+            //readdatafromgsheets
+
             dropdownValue = newValue;
           });
         },
@@ -118,6 +122,66 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
 
   bool decoy(){
     return false;
+  }
+
+  Future getHighestInCategory() async{
+    final gsheets = GSheets(Constants.credentials);
+    // fetch spreadsheet by its id
+    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
+
+    final sheet = ss.worksheetByTitle('Sheet2');
+
+    int highestRating = -1;
+    int lineCounter = -1;
+
+    final List<String> ratings = await sheet.values.column(4);
+    List<int> sheetRatings = ratings.map(int.parse).toList();//parse list to INT
+    //final List<String> sheetFood = await sheet.values.column(2);
+    int lines = sheetRatings.length;
+
+    if (dropdownValue == 'Indiferente'){
+      for(int i = 0; i < lines; i++){
+        if (sheetRatings[i] > highestRating){
+          highestRating = sheetRatings[i];
+          lineCounter = i + 1;//gsheets is indexed starting from 1
+        }
+      }
+    }else{
+      final List<String> sheetRestaurants = await sheet.values.column(1);
+      for(int i = 0; i < lines; i++){
+        if (sheetRatings[i] > highestRating && sheetRestaurants == dropdownValue){
+          highestRating = sheetRatings[i];
+          lineCounter = i + 1;
+        }
+      }
+    }
+
+    List<String> bestMeal = await sheet.values.row(lineCounter);
+
+    this.mealType = bestMeal[2];
+    this.mealRating = int.parse(bestMeal[3]);
+    //this.mealRatingQuant = "23",//TODO i dont have this info in google sheets
+    this.mealName = bestMeal[1];
+    this.establishment =  bestMeal[0];
+
+
+    /*for(List daylist in aggMeals){
+      for(Meal meal in daylist){
+        bool isPresent = false;
+        for(int i = 0; i < sheetFood.length; i++){
+          if(meal.name == sheetFood[i] && restaurantName == sheetRestaurants[i]){
+            isPresent = true;
+            meal.rating = double.parse(await sheet.values.value(column: 4, row: i + 1)) ;
+            break;
+          }
+        }
+        if(!isPresent){
+          lines = lines + 1;
+          meal.rating = 0;
+          sheet.values.insertRow( lines, [restaurantName, meal.name,meal.type,0] );
+        }
+      }
+    }*/
   }
 
 
