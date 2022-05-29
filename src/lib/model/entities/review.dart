@@ -30,7 +30,7 @@ class Review{
 
   String toString()
   {
-    return ("Stars: $stars , Username: $username , Comment: $comment ");
+    return ("$stars&$username&$comment");
 
   }
 }

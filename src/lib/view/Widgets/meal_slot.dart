@@ -126,7 +126,7 @@ class MealSlot extends StatelessWidget{
   bool transitionToRatingPage(BuildContext context){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => FoodFeupRatingView()));
+        MaterialPageRoute(builder: (context) => FoodFeupRatingView(restaurant: restaurant, mealname: name)));
 
     return true;
   }

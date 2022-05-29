@@ -3,9 +3,12 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gsheets/gsheets.dart';
+import 'package:tuple/tuple.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 
 import 'package:uni/model/entities/review.dart';
+
+import '../../controller/local_storage/app_shared_preferences.dart';
 
 class FoodFeupRating extends StatefulWidget{
   final String restaurant, mealname;
@@ -27,10 +30,9 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
   bool anonymousComment = false;
 
   @override
-  Widget build(BuildContext context) {
+    Widget build(BuildContext context) {
     rest = widget.restaurant;
     meal = widget.mealname;
-    print("buiiiild");
     print(meal);
     return Scaffold(
         body: Center(
@@ -45,9 +47,16 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     return false;
   }
 
-  void writeSheets(double s, String us, String com, String ml, String rest) async{
+  void writeSheets(double s, String com, String ml, String rest) async{
+
+    final Tuple2<String, String> userPersistentCredentials = await AppSharedPreferences.getPersistentUserInfo();
+    username = userPersistentCredentials.item1;
+    print("------------------------------- \n \n");
+    print(username);
+    print("\n \n ------------------------------- \n \n");
+
     print("Hello there");
-    Review r = Review(s, us, ml, rest);
+    Review r = Review(s, username, ml, rest);
     if (com != "")
       r.addComment(com);
     print("passa o add comment");
@@ -68,8 +77,10 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
         if (col[i] == r.meal)
           {
             print("found the stuff");
-            List<String> row = await sheet.values.row(i);
-
+            List<String> row = await sheet.values.row(i+1);
+            print("\n \n ------------------------------- \n \n");
+            print(row.length);
+            print("\n \n ------------------------------- \n \n");
             await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
           }
       }
@@ -151,7 +162,7 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
   }
 
   Widget generateCommentField(BuildContext context, String text, String user) {
-    username = user;    //save the username
+    //username = user;    //save the username
 
     return Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
             child: Center(
@@ -273,7 +284,7 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
                       .of(context)
                       .accentColor,
                 ),
-                onPressed: () =>  writeSheets(rate, username, comment, meal, rest),
+                onPressed: () =>  writeSheets(rate, comment, meal, rest),
 
 
                 child: ListView(
