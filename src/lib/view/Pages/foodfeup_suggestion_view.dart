@@ -162,7 +162,7 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
   bool transitionToRatingPage(BuildContext context){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => FoodFeupRatingView()));
+        MaterialPageRoute(builder: (context) => FoodFeupRatingView(restaurant: establishment, mealname: mealName)));
 
     return true;
   }

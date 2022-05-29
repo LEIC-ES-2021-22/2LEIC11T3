@@ -12,7 +12,7 @@ import '../../controller/local_storage/app_shared_preferences.dart';
 
 class FoodFeupRating extends StatefulWidget{
   final String restaurant, mealname;
-  const FoodFeupRating({Key key, @required this.restaurant, @required this.mealname }) : super(key: key);
+  const FoodFeupRating({Key key, @required this.restaurant, @required this.mealname}) : super(key: key);
 
   @override
   FoodFeupRatingState createState() => FoodFeupRatingState();
