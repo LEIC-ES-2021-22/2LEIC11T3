@@ -28,7 +28,7 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
 
   String mealType;
   double mealRating;
-  String mealRatingQuant = "23";//TODO i dont have this info in google sheets
+  String mealRatingQuant;//TODO i dont have this info in google sheets
   String mealName;
   String establishment;
 
@@ -69,8 +69,6 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
     final List<String> sheetRatings = await sheet.values.column(4);
 
     print(sheetRatings);
-    //List<int> sheetRatings = ratings.map(int.parse).toList();//parse list to INT
-    //final List<String> sheetFood = await sheet.values.column(2);
     int lines = sheetRatings.length;
 
     if (dropdownValue == 'Indiferente'){
@@ -92,13 +90,11 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
 
     List<String> bestMeal = await sheet.values.row(lineCounter);
 
-    print(bestMeal);
-
     establishment =  bestMeal[0];
     mealName = bestMeal[1];
     mealType = bestMeal[2];
     mealRating = double.parse(bestMeal[3]);
-    //this.mealRatingQuant = "23",//TODO i dont have this info in google sheets
+    mealRatingQuant = "23"; //TODO i dont have this info in google sheets
 
     return sheet;
   }
@@ -121,6 +117,5 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
           mealName: mealName,
           establishment: establishment);
     }
-    return FoodFeupSuggestion();
   }
 }

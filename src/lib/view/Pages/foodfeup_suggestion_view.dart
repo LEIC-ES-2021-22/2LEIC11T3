@@ -49,13 +49,6 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
 
   @override
   Widget build(BuildContext context){
-    //getHighestInCategory();
-    /*establishment = "Cantina almoço";
-    mealType = "Vegetariano";
-    mealRating = 4;
-    mealRatingQuant = "23";
-    mealName = "Jardineira de soja (batata,ervilhas e cenoura)";*/
-
     return (SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
