@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 
@@ -66,7 +67,20 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
               color:Theme.of(context).accentColor ),),
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 3)),
           Row( children: [
-            Text("Stars go here"),
+            RatingBar.builder(
+              initialRating: roundRating(),
+              glow: false,
+              direction: Axis.horizontal,
+              itemCount: 5,
+              itemSize: 40,
+              ignoreGestures: true,
+              allowHalfRating: true,
+              itemBuilder: (context, _) =>
+                  Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+            ),
             Text("(" + mealRatingQuant + ")",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,
                 color:Theme.of(context).accentColor ))
             ],
@@ -128,6 +142,21 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
           )
       ),
     );
+  }
+
+  double roundRating(){
+    if(mealRating==null) this.mealRating = 0;
+    double remainder = mealRating.remainder(1);
+
+
+    if(remainder < 0.25){
+      return mealRating.floorToDouble();
+    }
+    if(remainder < 0.75){
+      return mealRating.floorToDouble()+0.5;
+    }
+
+    return mealRating.ceilToDouble();
   }
 
   bool decoy(){
