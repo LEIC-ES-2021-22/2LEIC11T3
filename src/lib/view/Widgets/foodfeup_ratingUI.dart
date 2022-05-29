@@ -33,7 +33,6 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     Widget build(BuildContext context) {
     rest = widget.restaurant;
     meal = widget.mealname;
-    print(meal);
     return Scaffold(
         body: Center(
           child: ListView(
@@ -51,36 +50,23 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
 
     final Tuple2<String, String> userPersistentCredentials = await AppSharedPreferences.getPersistentUserInfo();
     username = userPersistentCredentials.item1;
-    print("------------------------------- \n \n");
-    print(username);
-    print("\n \n ------------------------------- \n \n");
 
-    print("Hello there");
     Review r = Review(s, username, ml, rest);
     if (com != "")
       r.addComment(com);
-    print("passa o add comment");
     String text = r.toString();
-    print(text);
 
     final gsheets = GSheets(Constants.credentials);
     final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
     Worksheet sheet = ss.worksheetByTitle("Sheet2");
 
-    print("i");
-    print(r.meal);
-
     List<String> col = await sheet.values.column(2);
     for(int i = 0; i < col.length; i++)
       {
-        print(col[i]);
+
         if (col[i] == r.meal)
           {
-            print("found the stuff");
             List<String> row = await sheet.values.row(i+1);
-            print("\n \n ------------------------------- \n \n");
-            print(row.length);
-            print("\n \n ------------------------------- \n \n");
             await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
           }
       }
@@ -220,7 +206,6 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
               ),
           onRatingUpdate: (rating) {
             rate = rating;
-            print(rating);
           },
         ));
   }
