@@ -3,10 +3,28 @@ import 'package:gsheets/gsheets.dart';
 import 'package:uni/utils/constants.dart' as Constants;
 
 class FoodFeupSuggestion extends StatefulWidget{
-  const FoodFeupSuggestion({Key key}) : super(key: key);
+  final String mealType;
+  final double mealRating;
+  final String mealRatingQuant;
+  final String mealName;
+  final String establishment;
+
+  const FoodFeupSuggestion({Key key,
+    this.mealType ,
+    this.mealRating ,
+    this.mealRatingQuant ,
+    this.mealName ,
+    this.establishment
+  }) : super(key: key);
 
   @override
-  FoodFeupSuggestionState createState() => FoodFeupSuggestionState();
+  FoodFeupSuggestionState createState() => FoodFeupSuggestionState(
+    mealType: mealType,
+    mealRating: mealRating,
+    mealRatingQuant: mealRatingQuant,
+    mealName: mealName,
+    establishment: establishment
+  );
 }
 
 class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
@@ -24,7 +42,7 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
   final List<String> options = ["Indiferente","Carne","Peixe","Vegetariano","Dieta","Sopa"];
   String dropdownValue;
   String mealType;
-  int mealRating;
+  double mealRating;
   String mealRatingQuant;
   String mealName;
   String establishment;

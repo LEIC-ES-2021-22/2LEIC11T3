@@ -17,7 +17,6 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
       .now()
       .weekday;
 
-
   final List<String> options = [//TODO: why is this here?
     'Indiferente',
     'Carne',
@@ -26,6 +25,13 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
     'Dieta',
     'Sopa',
   ];
+
+  String mealType;
+  double mealRating;
+  String mealRatingQuant = "23";//TODO i dont have this info in google sheets
+  String mealName;
+  String establishment;
+
 
   Worksheet sheet;
 
@@ -88,12 +94,11 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
 
     print(bestMeal);
 
-    /*
-    this.mealType = bestMeal[2];
-    this.mealRating = int.parse(bestMeal[3]);
+    establishment =  bestMeal[0];
+    mealName = bestMeal[1];
+    mealType = bestMeal[2];
+    mealRating = double.parse(bestMeal[3]);
     //this.mealRatingQuant = "23",//TODO i dont have this info in google sheets
-    this.mealName = bestMeal[1];
-    this.establishment =  bestMeal[0];*/
 
     return sheet;
   }
@@ -109,7 +114,12 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
       });
       return LoadingScreen();
     } else {
-      return FoodFeupSuggestion();
+      return FoodFeupSuggestion(
+          mealType: mealType,
+          mealRating: mealRating,
+          mealRatingQuant: mealRatingQuant,
+          mealName: mealName,
+          establishment: establishment);
     }
     return FoodFeupSuggestion();
   }
