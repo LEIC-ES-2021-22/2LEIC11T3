@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:gsheets/gsheets.dart';
-import 'package:uni/utils/constants.dart' as Constants;
+import 'package:uni/view/Pages/foodfeup_rating_view.dart';
+
 
 class FoodFeupSuggestion extends StatefulWidget{
   final String mealType;
@@ -138,7 +138,7 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
               ),
               primary: color,
             ),
-            onPressed: decoy,//TODO change to real function
+            onPressed:  () => transitionToRatingPage(context),
           )
       ),
     );
@@ -159,7 +159,11 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
     return mealRating.ceilToDouble();
   }
 
-  bool decoy(){
-    return false;
-    }
+  bool transitionToRatingPage(BuildContext context){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FoodFeupRatingView()));
+
+    return true;
   }
+}
