@@ -1,38 +1,55 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:uni/view/Widgets/page_title.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:uni/view/Pages/foodfeup_rating_view.dart';
 
-class FoodFeupSuggestionPageView extends StatelessWidget {
-  FoodFeupSuggestionPageView({
-    Key key,
-    @required this.options,
-    this.mealType,
-    this.mealRating,
-    this.mealRatingQuant,
-    this.mealName,
+
+class FoodFeupSuggestion extends StatefulWidget{
+  final String mealType;
+  final double mealRating;
+  final String mealRatingQuant;
+  final String mealName;
+  final String establishment;
+
+  const FoodFeupSuggestion({Key key,
+    this.mealType ,
+    this.mealRating ,
+    this.mealRatingQuant ,
+    this.mealName ,
     this.establishment
+  }) : super(key: key);
+
+  @override
+  FoodFeupSuggestionState createState() => FoodFeupSuggestionState(
+    mealType: mealType,
+    mealRating: mealRating,
+    mealRatingQuant: mealRatingQuant,
+    mealName: mealName,
+    establishment: establishment
+  );
+}
+
+class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
+  FoodFeupSuggestionState({
+    Key key,
+    //this.options,
+    this.mealType = "Vegetariano",
+    this.mealRating = 4,
+    this.mealRatingQuant = "23",
+    this.mealName = "Jardineira de soja (batata,ervilhas e cenoura)",
+    this.establishment = "Cantina almoço",
+    this.dropdownValue = 'Indiferente'
     });
 
-  final List<String> options;
+  final List<String> options = ["Indiferente","Carne","Peixe","Vegetariano","Dieta","Sopa"];
   String dropdownValue;
   String mealType;
-  int mealRating;
+  double mealRating;
   String mealRatingQuant;
   String mealName;
   String establishment;
 
   @override
   Widget build(BuildContext context){
-    dropdownValue = options[0];//TODO: read these from somewhere
-    establishment = "Cantina almoço";
-    mealType = "Vegetariano";
-    mealRating = 4;
-    mealRatingQuant = "23";
-    mealName = "Jardineira de soja (batata,ervilhas e cenoura)";
-
-
-
     return (SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
@@ -50,7 +67,20 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
               color:Theme.of(context).accentColor ),),
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 3)),
           Row( children: [
-            Text("Stars go here"),
+            RatingBar.builder(
+              initialRating: roundRating(),
+              glow: false,
+              direction: Axis.horizontal,
+              itemCount: 5,
+              itemSize: 40,
+              ignoreGestures: true,
+              allowHalfRating: true,
+              itemBuilder: (context, _) =>
+                  Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+            ),
             Text("(" + mealRatingQuant + ")",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14,
                 color:Theme.of(context).accentColor ))
             ],
@@ -78,7 +108,10 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
           color: color,
         ),
         onChanged: (String newValue){//TODO:Make this update the page content
-          dropdownValue = newValue;
+          setState(() {
+            dropdownValue = newValue;
+            //getHighestInCategory();
+          });
         },
         items: options.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
@@ -105,15 +138,32 @@ class FoodFeupSuggestionPageView extends StatelessWidget {
               ),
               primary: color,
             ),
-            onPressed: decoy,//TODO change to real function
-
+            onPressed:  () => transitionToRatingPage(context),
           )
       ),
     );
   }
 
-  bool decoy(){
-    return false;
+  double roundRating(){
+    if(mealRating==null) this.mealRating = 0;
+    double remainder = mealRating.remainder(1);
+
+
+    if(remainder < 0.25){
+      return mealRating.floorToDouble();
+    }
+    if(remainder < 0.75){
+      return mealRating.floorToDouble()+0.5;
+    }
+
+    return mealRating.ceilToDouble();
   }
 
+  bool transitionToRatingPage(BuildContext context){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FoodFeupRatingView()));
+
+    return true;
   }
+}
