@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:uni/view/Pages/foodfeup_rating_view.dart';
 
+import 'package:uni/model/foodfeup_suggestion_model.dart';
+
 
 class FoodFeupSuggestion extends StatefulWidget{
   final String mealType;
@@ -110,7 +112,7 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
         onChanged: (String newValue){//TODO:Make this update the page content
           setState(() {
             dropdownValue = newValue;
-            //getHighestInCategory();
+            transitionToSuggestion(context);
           });
         },
         items: options.map<DropdownMenuItem<String>>((String value) {
@@ -163,6 +165,14 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => FoodFeupRatingView(restaurant: establishment, mealname: mealName)));
+
+    return true;
+  }
+
+  bool transitionToSuggestion(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FoodFeupSuggestionPage(dropdownValue: dropdownValue)));
 
     return true;
   }
