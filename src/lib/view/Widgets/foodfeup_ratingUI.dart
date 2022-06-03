@@ -46,6 +46,16 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
     return false;
   }
 
+  String getUser(String str)
+  {
+    List<String> separated = str.split('&');
+    print("-------------\n");
+    print(separated[1]);
+    print("\n-------------\n");
+    return separated[1];
+
+  }
+
   void writeSheets(double s, String com, String ml, String rest) async{
 
     final Tuple2<String, String> userPersistentCredentials = await AppSharedPreferences.getPersistentUserInfo();
@@ -66,13 +76,29 @@ class FoodFeupRatingState extends State<FoodFeupRating> {
 
         if (col[i] == r.meal)
           {
+            print("Found meal " + r.meal + "\n");
             List<String> row = await sheet.values.row(i+1);
-            await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
+            if (row.length < 5)
+              await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
+            else{
+              for (int j = 4; j < row.length; j++)
+              {
+                print("Entrou nesta cena \n");
+                print(row[j]);
+                if (getUser(row[j]) == username)
+                {
+                  print("Found user " + getUser(row[j]) + "\n");
+                  await sheet.values.insertValue(text, column: j + 1, row: i + 1);
+                  return;
+                }
+              }
+
+              await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
+
+
+            }
           }
       }
-
-
-
   }
 
   List<Widget> getWidgets(BuildContext context) {
