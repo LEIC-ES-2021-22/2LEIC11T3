@@ -21,6 +21,7 @@ class FoodFeupRating1 extends StatefulWidget{
 class FoodFeupRating1State extends State<FoodFeupRating1> {
   static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   static Key _k1 = new GlobalKey();
+  static Key _k2 = new GlobalKey();
 
   String rest;
   String meal;
@@ -80,6 +81,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
 
   Widget generateRatingBar(BuildContext context) {
     return Center(
+        key: _k2,
         child: RatingBar.builder(
           initialRating: 0,
           minRating: 0,
