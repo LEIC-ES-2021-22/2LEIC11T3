@@ -163,7 +163,6 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => FoodFeupRatingView(restaurant: establishment, mealname: mealName)));
-
     return true;
   }
 }
