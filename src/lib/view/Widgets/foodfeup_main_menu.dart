@@ -76,7 +76,7 @@ bool transitionToEstablishment(BuildContext context, String buttonName, Map meal
 bool transitionToSuggestion(BuildContext context, String buttonName, Map unused) {
   Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => FoodFeupSuggestionPage()));
+      MaterialPageRoute(builder: (context) => FoodFeupSuggestionPage(dropdownValue: "Indiferente",)));
 
   return true;
 }

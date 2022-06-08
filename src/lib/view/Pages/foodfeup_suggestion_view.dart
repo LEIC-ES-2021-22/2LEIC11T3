@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:uni/view/Pages/foodfeup_rating_view.dart';
@@ -11,13 +12,15 @@ class FoodFeupSuggestion extends StatefulWidget{
   final String mealRatingQuant;
   final String mealName;
   final String establishment;
+  final String dropdownValue;
 
   const FoodFeupSuggestion({Key key,
     this.mealType ,
     this.mealRating ,
     this.mealRatingQuant ,
     this.mealName ,
-    this.establishment
+    this.establishment,
+    @required this.dropdownValue
   }) : super(key: key);
 
   @override
@@ -26,7 +29,8 @@ class FoodFeupSuggestion extends StatefulWidget{
     mealRating: mealRating,
     mealRatingQuant: mealRatingQuant,
     mealName: mealName,
-    establishment: establishment
+    establishment: establishment,
+    dropdownValue: dropdownValue
   );
 }
 
@@ -39,7 +43,7 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
     this.mealRatingQuant = "23",
     this.mealName = "Jardineira de soja (batata,ervilhas e cenoura)",
     this.establishment = "Cantina almoço",
-    this.dropdownValue = 'Indiferente'
+    @required this.dropdownValue
     });
 
   final List<String> options = ["Indiferente","Carne","Peixe","Vegetariano","Dieta","Sopa"];

@@ -69,13 +69,8 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
 
     final List<String> sheetRatings = await sheet.values.column(4);
 
-    print(sheetRatings);
     int lines = sheetRatings.length;
-    print("antes");
-    print(dropdownValue);
-    print("depois");
     if (dropdownValue == 'Indiferente' || dropdownValue == null){
-      print("Estou aquiii");
       for(int i = 0; i < lines; i++){
         if (double.parse(sheetRatings[i]) > highestRating){
           highestRating = double.parse(sheetRatings[i]);
@@ -83,17 +78,14 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
         }
       }
     }else{
-      print("Estou no elseee");
-      final List<String> sheetRestaurants = await sheet.values.column(1);
+      final List<String> sheetCategory = await sheet.values.column(3);
       for(int i = 0; i < lines; i++){
-        if (double.parse(sheetRatings[i]) > highestRating && sheetRestaurants == dropdownValue){ //TODO arranjar isto
-          print("Estou no if");
+        if (double.parse(sheetRatings[i]) > highestRating && sheetCategory[i] == dropdownValue){
           highestRating = double.parse(sheetRatings[i]);
           lineCounter = i + 1;
         }
       }
     }
-    print("Estou foraaa");
 
     List<String> bestMeal = await sheet.values.row(lineCounter);
 
@@ -122,7 +114,9 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
           mealRating: mealRating,
           mealRatingQuant: mealRatingQuant,
           mealName: mealName,
-          establishment: establishment);
+          establishment: establishment,
+          dropdownValue: dropdownValue
+      );
     }
   }
 }
