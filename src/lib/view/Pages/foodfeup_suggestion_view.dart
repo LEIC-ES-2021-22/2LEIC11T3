@@ -61,13 +61,8 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
       child: Column(
         children: [
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
-          Text("Recomendação",
-            style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30),),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
-          createDropdownButton(Theme.of(context).accentColor),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
           Text(establishment,
-              style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30),),
+              style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30)),
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
           Text(mealType,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 30,
               color:Theme.of(context).accentColor ),),
@@ -101,31 +96,6 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
           createReviewButton(Theme.of(context).accentColor)]
         ,)
       ));
-    }
-
-    Widget createDropdownButton(Color color){
-      return DropdownButton<String>(
-        value: dropdownValue,
-        icon: const Icon(Icons.arrow_downward),
-        style: const TextStyle(color: Colors.black),
-        borderRadius: BorderRadius.circular(1),
-        underline: Container(
-          height: 2,
-          color: color,
-        ),
-        onChanged: (String newValue){//TODO:Make this update the page content
-          setState(() {
-            dropdownValue = newValue;
-            transitionToSuggestion(context);
-          });
-        },
-        items: options.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      );
     }
 
   Widget createReviewButton(Color color){
