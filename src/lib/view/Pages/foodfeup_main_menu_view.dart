@@ -15,7 +15,7 @@ class FoodFeupMainMenuPageViewState extends SecondaryPageViewState {
   @override
   Widget getBody(BuildContext context) {
     return  Container(
-        margin:  EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+        margin:  EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         child:  FoodFeupMainMenu()
     );
   }
