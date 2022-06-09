@@ -19,16 +19,15 @@ class FoodFeupRating1 extends StatefulWidget{
 }
 
 class FoodFeupRating1State extends State<FoodFeupRating1> {
-  static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  static Key _k1 = new GlobalKey();
-  static Key _k2 = new GlobalKey();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final Key _k1 = GlobalKey();
+  static final Key _k2 = GlobalKey();
 
   String rest;
   String meal;
-  double rate;
+  double rate = 0;
   String username;
   String comment = "";
-  bool anonymousComment = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,20 +47,58 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
 
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+
     widgets.add(generateText(
-        context, "Toque para avaliar:", TextAlign.center, Colors.black, 16));
+        context, "Toque para avaliar:", TextAlign.left, Colors.black, 16));
+
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+
     widgets.add(generateRatingBar(context));
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+
     widgets.add(
         generateText(context, "Deixe um commentário", TextAlign.left, Theme
             .of(context)
             .accentColor, 20));
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+
     widgets.add(generateTextInput(context));
+
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+
+    widgets.add(generatePostCommentButtom(context));
+
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+
+    widgets.add(Divider(color: Theme
+        .of(context)
+        .accentColor, thickness: 4));
+
+    widgets.add(
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
+
+
+    widgets.add(generateCommentField(context, "asdadasdasdasdas"
+        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
+        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
+
+    widgets.add(generateCommentField(context, "asdadasdasdasdas"
+        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
+        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
+
+    widgets.add(generateCommentField(context, "asdadasdasdasdas"
+        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
+        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
+
+    widgets.add(generateCommentField(context, "asdadasdasdasdas"
+        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
+        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
+
 
     return widgets;
   }
@@ -113,7 +150,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
         textAlignVertical: TextAlignVertical.top,
         cursorColor: Colors.black,
         key: _k1,
-        maxLines: 2,
+        maxLines: 3,
         decoration: InputDecoration(
             hintText: 'Clique aqui',
             enabledBorder: OutlineInputBorder(
@@ -127,5 +164,98 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
       ),
     );
   }
+
+  Widget generatePostCommentButtom(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        child: SizedBox(
+            height: 40,
+            width: 300,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  primary: Theme
+                      .of(context)
+                      .accentColor,
+                ),
+                onPressed: () =>  writeSheets(rate, comment, meal, rest),
+
+
+                child: ListView(
+                  children:
+                  [ Center(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text("Post",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 20,
+                              overflow: TextOverflow.ellipsis
+                          ),
+                          textAlign: TextAlign.center),
+                    ),
+                  ),
+                  ],
+                )
+            )
+        )
+    );
+  }
+
+  void writeSheets(double s, String com, String ml, String rest) async{
+    final Tuple2<String, String> userPersistentCredentials = await AppSharedPreferences.getPersistentUserInfo();
+    username = userPersistentCredentials.item1;
+
+    Review r = Review(s, username, ml, rest);
+    if (com != "")
+      r.addComment(com);
+    String text = r.toString();
+
+    final gsheets = GSheets(Constants.credentials);
+    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
+    Worksheet sheet = ss.worksheetByTitle("Sheet2");
+
+    List<String> col = await sheet.values.column(2);
+    for(int i = 0; i < col.length; i++)
+    {
+
+      if (col[i] == r.meal)
+      {
+        List<String> row = await sheet.values.row(i+1);
+        await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
+      }
+    }
+
+
+
+  }
+
+  Widget generateCommentField(BuildContext context, String text, String user) {
+    return Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+        child: Center(
+            child : SizedBox (
+              height: 50,
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      Icon(IconData(0xe491, fontFamily: 'MaterialIcons')),
+                      generateText(context, user, TextAlign.left, Colors.black, 12),
+                    ],
+                  ),
+                  VerticalDivider(color: Colors.grey, thickness: 4),
+                  Expanded( child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: generateText(context, text, TextAlign.left, Colors.black, 12)))
+                ],
+              ),
+            )
+        )
+    );
+  }
+
 }
 
