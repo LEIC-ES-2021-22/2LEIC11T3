@@ -5,6 +5,7 @@ import 'package:uni/view/Widgets/bug_report_form.dart';
 
 import '../Widgets/foodfeup_main_menu.dart';
 import '../Widgets/foodfeup_ratingUI.dart';
+import '../Widgets/foodfeup_ratingUI1.dart';
 
 
 class FoodFeupRatingView extends StatefulWidget {
@@ -22,7 +23,7 @@ class FoodFeupRatingViewState extends SecondaryPageViewState {
   Widget getBody(BuildContext context) {
     return  Container(
         margin:  EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-        child:  FoodFeupRating(restaurant: restaurant, mealname: mealname)
+        child:  FoodFeupRating1(restaurant: restaurant, mealname: mealname)
     );
   }
 }
