@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:gsheets/gsheets.dart';
 
 import 'package:uni/view/Widgets/row_container.dart';
+
+import 'package:uni/utils/constants.dart' as Constants;
 
 import 'package:uni/view/Pages/foodfeup_rating_view.dart';
 
@@ -11,7 +14,7 @@ class MealSlot extends StatelessWidget{
   final String name;
   double rating;
   final String restaurant;
-  final int ratingQuantity;
+  int ratingQuantity;
 
   MealSlot({
     Key key,
@@ -22,10 +25,10 @@ class MealSlot extends StatelessWidget{
     this.ratingQuantity,
   }): super(key: key);
 
-  double roundRating(){
+  double roundRating() {
     if(rating==null) this.rating = 0;
+    if(ratingQuantity == null) this.ratingQuantity = 0;
     double remainder = rating.remainder(1);
-
 
     if(remainder < 0.25){
       return rating.floorToDouble();
@@ -69,7 +72,7 @@ class MealSlot extends StatelessWidget{
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
         TextAlign.center);
     final ratingQuantityTextField = createTextField(
-        "(20)",
+        "(" +  (this.ratingQuantity == null? "0" : this.ratingQuantity.toString()) + ")",
         Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4),
         TextAlign.center);
     return [
