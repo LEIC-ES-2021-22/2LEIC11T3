@@ -34,7 +34,8 @@ class FoodFeupSuggestionSelectionState extends State<FoodFeupSuggestionSelection
 
   Widget createDropdownButton(Color color){
     return DropdownButton<String>(
-      value: dropdownValue,
+      hint: Text("selecione aqui", style: TextStyle(color: Colors.black54)),
+      value: null,
       icon: const Icon(Icons.arrow_downward),
       style: const TextStyle(color: Colors.black),
       borderRadius: BorderRadius.circular(1),
