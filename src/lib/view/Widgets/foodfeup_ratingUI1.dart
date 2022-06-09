@@ -98,7 +98,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
     widgets.add(generateText(
-        context, "Toque para avaliar:", TextAlign.left, Color.fromRGBO(117, 23, 30, 1), 16));
+        context, "Toque para avaliar:", TextAlign.left, Color.fromRGBO(117, 23, 30, 1), 20));
 
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
