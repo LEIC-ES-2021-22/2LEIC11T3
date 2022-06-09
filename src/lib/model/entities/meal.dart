@@ -8,6 +8,7 @@ class Meal{
   final DayOfWeek dayOfWeek;
   final DateTime date;
   double rating;
+  int numberOfReviews;
 
   List<Review> reviews;
   Meal(this.type, this.name, this.dayOfWeek, this.date)

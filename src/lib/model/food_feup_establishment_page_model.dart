@@ -72,86 +72,6 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
       aggMeals.add([]);
     }
 
-    /*
-    for (int i = 0; i < daysOfTheWeek.length; i++) {
-      List<Meal> meals = [];
-      for(int j= 1; j < 6; j++){
-        List<String> line = await sheet.values.row(j);
-        //print(line);
-        meals.add(Meal(line[0], line[1], DayOfWeek.monday, DateTime.now()));
-        int row = 4;
-        while (row < line.length && line[row].isNotEmpty)
-          {
-            print("Im inside the loop");
-            int stars;
-            String usname;
-            String com;
-            int part = 0;
-            String text = "";
-            for (int k = 0; k < line[row].length; k++){
-              print("For number: $k");
-                if (part == 3)
-                  break;
-
-                if (line[row][k] == "&")
-                  {
-                    switch(part){
-                      case 0:
-                        stars = int.parse(text);
-                        text = "";
-                        break;
-                      case 1:
-                        usname = text;
-                        text = "";
-                        break;
-                      case 2:
-                        com = text;
-                        text = "";
-                        break;
-                      default:
-                        break;
-                    }
-
-                    part++;
-
-                  }
-                else{
-                  text += line[row][k];
-                }
-              }
-
-            switch(part){
-              case 1:
-                usname = text;
-                break;
-              case 2:
-                com = text;
-                break;
-              default:
-                break;
-            }
-
-
-
-            Review rev = Review(stars, usname, DateTime.now(), meals[j-1], 1);
-            if (com != "")
-              {
-                rev.addComment(com);
-              }
-            rev.printReview();
-
-            meals[j-1].reviews.add(rev);  //RESTAURANT HARDCODED SEE THIS LATER
-
-            row++;
-
-          }
-
-
-
-      }
-      aggMeals.add(meals);
-    }
-    */
     await check();
 
     return sheet;
@@ -175,6 +95,7 @@ class _FoodFeupEstablishmentPageState extends SecondaryPageViewState
           if(meal.name == sheetFood[i] && restaurantName == sheetRestaurants[i]){
             isPresent = true;
             meal.rating = double.parse(await sheet.values.value(column: 4, row: i + 1)) ;
+            meal.numberOfReviews = (await sheet.values.row(i+1)).length - 4;
             break;
           }
         }
