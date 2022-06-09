@@ -6,13 +6,15 @@ import 'package:uni/view/Pages/foodfeup_suggestion_view.dart';
 import 'package:uni/view/Pages/secondary_page_view.dart';
 
 class FoodFeupSuggestionPage extends StatefulWidget {
-  const FoodFeupSuggestionPage({Key key}) : super(key: key);
-
+  FoodFeupSuggestionPage({Key key, this.dropdownValue}) : super(key: key);
+  final String dropdownValue;
   @override
-  _FoodFeupSuggestionPageState createState() => _FoodFeupSuggestionPageState();
+  _FoodFeupSuggestionPageState createState() => _FoodFeupSuggestionPageState(dropdownValue: dropdownValue);
 }
 
 class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
+  _FoodFeupSuggestionPageState({Key key, this.dropdownValue});
+  final String dropdownValue;
   final int weekDay = DateTime
       .now()
       .weekday;
@@ -64,14 +66,11 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
 
     double highestRating = -1;
     int lineCounter = -1;
-    String dropdownValue = 'Indiferente';//TODO get var from
 
     final List<String> sheetRatings = await sheet.values.column(4);
 
-    print(sheetRatings);
     int lines = sheetRatings.length;
-
-    if (dropdownValue == 'Indiferente'){
+    if (dropdownValue == 'Indiferente' || dropdownValue == null){
       for(int i = 0; i < lines; i++){
         if (double.parse(sheetRatings[i]) > highestRating){
           highestRating = double.parse(sheetRatings[i]);
@@ -79,9 +78,9 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
         }
       }
     }else{
-      final List<String> sheetRestaurants = await sheet.values.column(1);
+      final List<String> sheetCategory = await sheet.values.column(3);
       for(int i = 0; i < lines; i++){
-        if (double.parse(sheetRatings[i]) > highestRating && sheetRestaurants == dropdownValue){
+        if (double.parse(sheetRatings[i]) > highestRating && sheetCategory[i] == dropdownValue){
           highestRating = double.parse(sheetRatings[i]);
           lineCounter = i + 1;
         }
@@ -115,7 +114,9 @@ class _FoodFeupSuggestionPageState extends SecondaryPageViewState {
           mealRating: mealRating,
           mealRatingQuant: mealRatingQuant,
           mealName: mealName,
-          establishment: establishment);
+          establishment: establishment,
+          dropdownValue: dropdownValue
+      );
     }
   }
 }

@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:uni/view/Pages/foodfeup_rating_view.dart';
+
+import 'package:uni/model/foodfeup_suggestion_model.dart';
 
 
 class FoodFeupSuggestion extends StatefulWidget{
@@ -9,13 +12,15 @@ class FoodFeupSuggestion extends StatefulWidget{
   final String mealRatingQuant;
   final String mealName;
   final String establishment;
+  final String dropdownValue;
 
   const FoodFeupSuggestion({Key key,
     this.mealType ,
     this.mealRating ,
     this.mealRatingQuant ,
     this.mealName ,
-    this.establishment
+    this.establishment,
+    @required this.dropdownValue
   }) : super(key: key);
 
   @override
@@ -24,7 +29,8 @@ class FoodFeupSuggestion extends StatefulWidget{
     mealRating: mealRating,
     mealRatingQuant: mealRatingQuant,
     mealName: mealName,
-    establishment: establishment
+    establishment: establishment,
+    dropdownValue: dropdownValue
   );
 }
 
@@ -37,7 +43,7 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
     this.mealRatingQuant = "23",
     this.mealName = "Jardineira de soja (batata,ervilhas e cenoura)",
     this.establishment = "Cantina almoço",
-    this.dropdownValue = 'Indiferente'
+    @required this.dropdownValue
     });
 
   final List<String> options = ["Indiferente","Carne","Peixe","Vegetariano","Dieta","Sopa"];
@@ -55,13 +61,8 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
       child: Column(
         children: [
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
-          Text("Recomendação",
-            style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30),),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
-          createDropdownButton(Theme.of(context).accentColor),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
           Text(establishment,
-              style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30),),
+              style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30)),
           Padding(padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
           Text(mealType,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 30,
               color:Theme.of(context).accentColor ),),
@@ -95,31 +96,6 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
           createReviewButton(Theme.of(context).accentColor)]
         ,)
       ));
-    }
-
-    Widget createDropdownButton(Color color){
-      return DropdownButton<String>(
-        value: dropdownValue,
-        icon: const Icon(Icons.arrow_downward),
-        style: const TextStyle(color: Colors.black),
-        borderRadius: BorderRadius.circular(1),
-        underline: Container(
-          height: 2,
-          color: color,
-        ),
-        onChanged: (String newValue){//TODO:Make this update the page content
-          setState(() {
-            dropdownValue = newValue;
-            //getHighestInCategory();
-          });
-        },
-        items: options.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      );
     }
 
   Widget createReviewButton(Color color){
@@ -163,6 +139,14 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => FoodFeupRatingView(restaurant: establishment, mealname: mealName)));
+    return true;
+  }
+
+  bool transitionToSuggestion(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FoodFeupSuggestionPage(dropdownValue: dropdownValue)));
+
     return true;
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:uni/controller/restaurant_fetcher/restaurant_fetcher_html.dart';
 import 'package:uni/model/food_feup_establishment_page_model.dart';
-import 'package:uni/model/foodfeup_suggestion_model.dart';
 import 'package:uni/main.dart';
+import 'package:uni/view/Pages/foodfeup_suggestion_selection_view.dart';
 
 class FoodFeupMainMenu extends StatefulWidget{
   @override
@@ -76,7 +76,7 @@ bool transitionToEstablishment(BuildContext context, String buttonName, Map meal
 bool transitionToSuggestion(BuildContext context, String buttonName, Map unused) {
   Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const FoodFeupSuggestionPage()));
+      MaterialPageRoute(builder: (context) => FoodFeupSuggestionSelectionView()));
 
   return true;
 }

@@ -14,7 +14,7 @@ Feature: Open main menu
     And I tap the "establishment_button_Grill" button and I dont wait
     Then I expect the widget 'establishment_menu' to be present within 30 seconds
 
-  Scenario: Be able to rate a meal
+  Scenario: Be able to access ratings page
     Given I am logged in
     When I open the drawer
     And I tap the "key_Food FEUP" button
@@ -27,4 +27,6 @@ Feature: Open main menu
     When I open the drawer
     And I tap the "key_Food FEUP" button
     And I tap the "establishment_button_Recomendação" button and I dont wait
+    And I tap the "dropdown_options" widget
+    And I tap the text that contains the text "Indiferente" within the "dropdown_options"
     Then I expect the text 'Recomendação' to be present
