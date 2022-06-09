@@ -6,6 +6,7 @@ import 'package:uni/view/Pages/foodfeup_establishment_view.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:uni/view/Widgets/meal_slot.dart';
+import 'package:uni/view/Widgets/page_title.dart';
 
 import '../../../testable_widget.dart';
 
@@ -59,11 +60,7 @@ void main() {
                   )));
           await tester.pumpWidget(widget);
 
-          expect(
-              find.descendant(
-                  of: find.),
-                  matching: find.byType(Container)),
-              findsOneWidget);
+
   });
 
 

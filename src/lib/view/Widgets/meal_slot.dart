@@ -48,6 +48,7 @@ class MealSlot extends StatelessWidget{
   }
 
   Widget createMealSlotRow(context) {
+
     return  Container(
         key: Key('schedule-slot-time-${this.name}'),
         margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
