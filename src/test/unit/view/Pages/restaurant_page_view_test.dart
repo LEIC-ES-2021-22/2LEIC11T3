@@ -5,6 +5,7 @@ import 'package:uni/model/utils/day_of_week.dart';
 import 'package:uni/view/Pages/foodfeup_establishment_view.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:uni/view/Widgets/meal_slot.dart';
 
 import '../../../testable_widget.dart';
 
@@ -57,6 +58,12 @@ void main() {
                     tabController: null,
                   )));
           await tester.pumpWidget(widget);
+
+          expect(
+              find.descendant(
+                  of: find.),
+                  matching: find.byType(Container)),
+              findsOneWidget);
   });
 
 
@@ -80,6 +87,12 @@ void main() {
                     tabController: null,
                   )));
           await tester.pumpWidget(widget);
+
+          expect(
+              find.descendant(
+                  of: find.byKey(Key('schedule-slot-time-Almondegas')),
+                  matching: find.byType(MealSlot)),
+              findsNWidgets(2));
         });
 
     testWidgets('When given several meala on sevral days',
@@ -102,6 +115,7 @@ void main() {
                   )));
           await tester.pumpWidget(widget);
         });
+
 
 
 });
