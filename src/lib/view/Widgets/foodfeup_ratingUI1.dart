@@ -31,6 +31,16 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   String username;
   String comment = "";
 
+  Future<List<Widget>> l;
+
+  @override
+  void initState() {
+    super.initState();
+    l = getWidgets(context);
+  }
+
+  
+
   @override
   Widget build(BuildContext context) {
     rest = widget.restaurant;
@@ -38,21 +48,57 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     rate = 0;
     return Scaffold(
         body: Center(
-          child: ListView(
-            children: getWidgets(context),
-          ),
+          child: FutureBuilder(
+            future: l,
+            builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+              List<Widget> children;
+              if (snapshot.hasData) {
+                children = snapshot.data;
+              } else if (snapshot.hasError) {
+                children = <Widget>[
+                  const Icon(
+                    Icons.error_outline,
+                    color: Color.fromRGBO(117, 23, 30, 1),
+                    size: 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text('Error: ${snapshot.error}'),
+                  )
+                ];
+              } else {
+                children = <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/3 ),
+                    child: SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text('Awaiting result...'),
+                  )
+                ];
+              }
+              return ListView(
+                children: children,
+              );
+            },
+          )
         )
     );
   }
 
-  List<Widget> getWidgets(BuildContext context) {
+  Future<List<Widget>> getWidgets(BuildContext context) async {
     final List<Widget> widgets = [];
 
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
     widgets.add(generateText(
-        context, "Toque para avaliar:", TextAlign.left, Colors.black, 16));
+        context, "Toque para avaliar:", TextAlign.left, Color.fromRGBO(117, 23, 30, 1), 16));
 
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
@@ -62,9 +108,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
     widgets.add(
-        generateText(context, "Deixe um commentário", TextAlign.left, Theme
-            .of(context)
-            .accentColor, 20));
+        generateText(context, "Deixe um commentário", TextAlign.left, Color.fromRGBO(117, 23, 30, 1), 20));
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
@@ -78,30 +122,37 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
-    widgets.add(Divider(color: Theme
-        .of(context)
-        .accentColor, thickness: 4));
+    widgets.add(Divider(color: Color.fromRGBO(117, 23, 30, 1), thickness: 4));
 
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
+    final gsheets = GSheets(Constants.credentials);
+    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
+    Worksheet sheet = ss.worksheetByTitle("Sheet2");
 
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
+    List<String> col = await sheet.values.column(2);
+    for(int i = 0; i < col.length; i++)
+    {
 
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
+      if (col[i] == meal)
+      {
+        List<String> row = await sheet.values.row(i+1);
+        int index = 0;
+        for(String s in row) {
+          if(index < 4 ) {
+            index = index + 1;
+            continue;
+          }
+          List<String> comm = s.split('&');
+          if(comm[2] != "") {
+            widgets.add(generateCommentField(context, comm[2], comm[1]));
+          }
+          index = index + 1;
+        }
 
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
-
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
-
+      }
+    }
 
     return widgets;
   }
@@ -154,7 +205,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
       child: TextField(
         onChanged: (text){comment = text;},
         textAlignVertical: TextAlignVertical.top,
-        cursorColor: Colors.black,
+        cursorColor: Color.fromRGBO(117, 23, 30, 1),
         key: _k1,
         maxLines: 3,
         decoration: InputDecoration(
@@ -182,9 +233,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  primary: Theme
-                      .of(context)
-                      .accentColor,
+                  primary: Color.fromRGBO(117, 23, 30, 1),
                 ),
                 onPressed: () =>  writeSheets(rate, comment, meal, rest),
 
@@ -254,7 +303,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
                 children: [
                   Column(
                     children: [
-                      Icon(IconData(0xe491, fontFamily: 'MaterialIcons')),
+                      Icon(IconData(0xe491, fontFamily: 'MaterialIcons'), color: Color.fromRGBO(117, 23, 30, 1)),
                       generateText(context, user, TextAlign.left, Colors.black, 12),
                     ],
                   ),
