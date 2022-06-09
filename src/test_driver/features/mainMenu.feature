@@ -27,4 +27,6 @@ Feature: Open main menu
     When I open the drawer
     And I tap the "key_Food FEUP" button
     And I tap the "establishment_button_Recomendação" button and I dont wait
+    And I tap the "dropdown_options" widget
+    And I tap the widget that contains the text "Indiferente" within the "dropdown_options"
     Then I expect the text 'Recomendação' to be present
