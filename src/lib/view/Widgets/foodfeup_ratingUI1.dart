@@ -307,7 +307,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
                       generateText(context, user, TextAlign.left, Colors.black, 12),
                     ],
                   ),
-                  VerticalDivider(color: Colors.grey, thickness: 4),
+                  VerticalDivider(color: Color.fromRGBO(117, 23, 30, 1), thickness: 4),
                   Expanded( child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: generateText(context, text, TextAlign.left, Colors.black, 12)))
