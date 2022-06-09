@@ -18,6 +18,8 @@ class FoodFeupRating1 extends StatefulWidget{
   FoodFeupRating1State createState() => FoodFeupRating1State();
 }
 
+double rate;
+
 class FoodFeupRating1State extends State<FoodFeupRating1> {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static final Key _k1 = GlobalKey();
@@ -25,7 +27,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
 
   String rest;
   String meal;
-  double rate = 0;
+
   String username;
   String comment = "";
 
@@ -33,6 +35,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   Widget build(BuildContext context) {
     rest = widget.restaurant;
     meal = widget.mealname;
+    rate = 0;
     return Scaffold(
         body: Center(
           child: ListView(
@@ -133,10 +136,13 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
                 Icons.star,
                 color: Colors.amber,
               ),
-          onRatingUpdate: (rating) {
-            rate = rating;
-          },
+          onRatingUpdate: updateRating
         ));
+  }
+  void updateRating(double r) {
+    rate = r;
+    print("New rate");
+    print(rate);
   }
 
   Widget generateTextInput(BuildContext context) {
@@ -205,7 +211,8 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     );
   }
 
-  void writeSheets(double s, String com, String ml, String rest) async{
+  void writeSheets(double s, String com, String ml, String rest) async {
+
     final Tuple2<String, String> userPersistentCredentials = await AppSharedPreferences.getPersistentUserInfo();
     username = userPersistentCredentials.item1;
 
@@ -226,11 +233,16 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
       {
         List<String> row = await sheet.values.row(i+1);
         await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
+        int numberOfReviews = row.length - 4;
+        double ratingOverall = numberOfReviews * double.parse(row[3]);
+        ratingOverall = ratingOverall + s;
+        ratingOverall = ratingOverall / (numberOfReviews + 1);
+
+        await sheet.values.insertValue(ratingOverall, column: 4, row: i + 1);
+
       }
     }
-
-
-
+    Navigator.pop(context);
   }
 
   Widget generateCommentField(BuildContext context, String text, String user) {
