@@ -221,20 +221,45 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     Worksheet sheet = ss.worksheetByTitle("Sheet2");
 
     List<String> col = await sheet.values.column(2);
+    bool replaceComment = false;
     for(int i = 0; i < col.length; i++)
     {
 
       if (col[i] == r.meal)
       {
         List<String> row = await sheet.values.row(i+1);
-        await sheet.values.insertValue(text, column: row.length + 1, row: i + 1);
-        int numberOfReviews = row.length - 4;
-        double ratingOverall = numberOfReviews * double.parse(row[3]);
-        ratingOverall = ratingOverall + s;
-        ratingOverall = ratingOverall / (numberOfReviews + 1);
+        int index = 0;
+        double previousRating;
+        for(String s in row) {
+          if(index < 4) {
+            index = index + 1;
+            continue;
+          }
+          List<String> splitted = s.split('&');
+          if(splitted[1].trim() == username.trim() ) {
+            previousRating = double.parse(splitted[0]);
+            replaceComment = true;
+            break;
+          }
+          index = index + 1;
+        }
+        if(!replaceComment) {
+          await sheet.values.insertValue(
+              text, column: row.length + 1, row: i + 1);
+          int numberOfReviews = row.length - 4;
+          double ratingOverall = numberOfReviews * double.parse(row[3]);
+          ratingOverall = ratingOverall + s;
+          ratingOverall = ratingOverall / (numberOfReviews + 1);
 
-        await sheet.values.insertValue(ratingOverall, column: 4, row: i + 1);
-
+          await sheet.values.insertValue(ratingOverall, column: 4, row: i + 1);
+        } else {
+          await sheet.values.insertValue(text, column: index + 1, row: i + 1);
+          int numberOfReviews = row.length - 4;
+          double ratingOverall = numberOfReviews * double.parse(row[3]);
+          ratingOverall = ratingOverall - previousRating + s;
+          ratingOverall = ratingOverall / numberOfReviews;
+          await sheet.values.insertValue(ratingOverall, column: 4, row: i + 1);
+        }
       }
     }
     Navigator.pop(context);
