@@ -69,14 +69,12 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
     final List<Widget> mealContent = <Widget>[];
     for (int i = 0; i < meals.length; i++) {
       final Meal meal = meals[i];
-      /*print("-----------");
-      print(meal.rating);
-      print("-----------");*/
+
       mealContent.add(MealSlot(
         type: meal.type,
         name: meal.name,
         rating: meal.rating,
-        ratingQuantity: 0,
+        ratingQuantity: meal.numberOfReviews,
       ));
     }
     return mealContent;
@@ -85,12 +83,14 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
   Widget Function(dynamic daycontent, BuildContext context) dayColumnBuilder(
       int day) {
     Widget createDayColumn(dayContent, BuildContext context) {
-      return Container(
+      return ListView(
+          children: [Container(
           key: Key('establishment-page-day-column-$day'),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: createMealRows(dayContent, context),
-          ));
+          ))]
+      );
     }
 
     return createDayColumn;
