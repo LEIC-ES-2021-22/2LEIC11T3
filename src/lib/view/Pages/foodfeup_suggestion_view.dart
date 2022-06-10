@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:uni/model/foodfeup_review_page_model.dart';
 import 'package:uni/view/Pages/foodfeup_rating_view.dart';
 
 
@@ -162,7 +163,7 @@ class FoodFeupSuggestionState extends State<FoodFeupSuggestion> {
   bool transitionToRatingPage(BuildContext context){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => FoodFeupRatingView(restaurant: establishment, mealname: mealName)));
+        MaterialPageRoute(builder: (context) => FoodFeupReviewPage(resturant: establishment, meal: mealName)));
     return true;
   }
 }

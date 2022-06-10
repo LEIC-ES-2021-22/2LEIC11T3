@@ -84,7 +84,9 @@ class _FoodFeupReviewPageState extends SecondaryPageViewState {
       return LoadingScreen();
     } else {
       return FoodFeupRating1(
-
+        restaurant: this.rest,
+        mealname: this.meal,
+        comms: this.comments
       );
     }
   }

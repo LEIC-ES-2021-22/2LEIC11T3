@@ -50,7 +50,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     return Scaffold(
         body: Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
             child: ListView(
               children: getWidgets(context),
             ),
