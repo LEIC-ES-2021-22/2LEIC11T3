@@ -12,7 +12,8 @@ import '../../controller/local_storage/app_shared_preferences.dart';
 
 class FoodFeupRating1 extends StatefulWidget{
   final String restaurant, mealname;
-  const FoodFeupRating1({Key key, @required this.restaurant, @required this.mealname}) : super(key: key);
+  final List<List<String>> comms;
+  const FoodFeupRating1({Key key, @required this.restaurant, @required this.mealname, @required this.comms}) : super(key: key);
 
   @override
   FoodFeupRating1State createState() => FoodFeupRating1State();
@@ -31,16 +32,29 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   String username;
   String comment = "";
 
+  List<List<String>> comments;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  
+
   @override
   Widget build(BuildContext context) {
     rest = widget.restaurant;
     meal = widget.mealname;
+    comments = widget.comms;
     rate = 0;
     return Scaffold(
         body: Center(
-          child: ListView(
-            children: getWidgets(context),
-          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+            child: ListView(
+              children: getWidgets(context),
+            ),
+          )
         )
     );
   }
@@ -52,7 +66,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
     widgets.add(generateText(
-        context, "Toque para avaliar:", TextAlign.left, Colors.black, 16));
+        context, "Toque para avaliar:", TextAlign.left, Color.fromRGBO(117, 23, 30, 1), 20));
 
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
@@ -62,9 +76,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
     widgets.add(
-        generateText(context, "Deixe um commentário", TextAlign.left, Theme
-            .of(context)
-            .accentColor, 20));
+        generateText(context, "Deixe um commentário", TextAlign.left, Color.fromRGBO(117, 23, 30, 1), 20));
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
@@ -78,29 +90,14 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
-    widgets.add(Divider(color: Theme
-        .of(context)
-        .accentColor, thickness: 4));
+    widgets.add(Divider(color: Color.fromRGBO(117, 23, 30, 1), thickness: 4));
 
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
-
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
-
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
-
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
-
-    widgets.add(generateCommentField(context, "asdadasdasdasdas"
-        "asdasdasdasdasdasdadsasdadasdadddddddadddddddddddddada"
-        "qweqweqweqweqweqeqezxczxczxczxczxczxczxczxczczxczxczczx", "upxxxxxxxxx"));
+    for(List<String> l in comments) {
+      widgets.add(generateCommentField(context, l[2], l[1]));
+    }
 
 
     return widgets;
@@ -154,7 +151,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
       child: TextField(
         onChanged: (text){comment = text;},
         textAlignVertical: TextAlignVertical.top,
-        cursorColor: Colors.black,
+        cursorColor: Color.fromRGBO(117, 23, 30, 1),
         key: _k1,
         maxLines: 3,
         decoration: InputDecoration(
@@ -182,9 +179,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  primary: Theme
-                      .of(context)
-                      .accentColor,
+                  primary: Color.fromRGBO(117, 23, 30, 1),
                 ),
                 onPressed: () =>  writeSheets(rate, comment, meal, rest),
 
@@ -254,11 +249,11 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
                 children: [
                   Column(
                     children: [
-                      Icon(IconData(0xe491, fontFamily: 'MaterialIcons')),
+                      Icon(IconData(0xe491, fontFamily: 'MaterialIcons'), color: Color.fromRGBO(117, 23, 30, 1)),
                       generateText(context, user, TextAlign.left, Colors.black, 12),
                     ],
                   ),
-                  VerticalDivider(color: Colors.grey, thickness: 4),
+                  VerticalDivider(color: Color.fromRGBO(117, 23, 30, 1), thickness: 4),
                   Expanded( child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: generateText(context, text, TextAlign.left, Colors.black, 12)))

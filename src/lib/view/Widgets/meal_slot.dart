@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gsheets/gsheets.dart';
+import 'package:uni/model/foodfeup_review_page_model.dart';
 
 import 'package:uni/view/Widgets/row_container.dart';
 
@@ -129,7 +130,7 @@ class MealSlot extends StatelessWidget{
   bool transitionToRatingPage(BuildContext context){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => FoodFeupRatingView(restaurant: restaurant, mealname: name)));
+        MaterialPageRoute(builder: (context) => FoodFeupReviewPage(resturant: restaurant, meal: name)));
 
     return true;
   }
