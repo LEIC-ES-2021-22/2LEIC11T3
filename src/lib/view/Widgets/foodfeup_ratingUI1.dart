@@ -46,7 +46,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     rest = widget.restaurant;
     meal = widget.mealname;
     comments = widget.comms;
-    rate = 0;
+
     return Scaffold(
         body: Center(
           child: Padding(
@@ -120,7 +120,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     return Center(
         key: _k2,
         child: RatingBar.builder(
-          initialRating: 0,
+          initialRating: rate == null ? 0 : rate,
           minRating: 0,
           glow: false,
           direction: Axis.horizontal,
@@ -138,8 +138,6 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   }
   void updateRating(double r) {
     rate = r;
-    print("New rate");
-    print(rate);
   }
 
   Widget generateTextInput(BuildContext context) {
@@ -207,7 +205,6 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   }
 
   void writeSheets(double s, String com, String ml, String rest) async {
-
     final Tuple2<String, String> userPersistentCredentials = await AppSharedPreferences.getPersistentUserInfo();
     username = userPersistentCredentials.item1;
 
@@ -237,6 +234,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
 
       }
     }
+    rate = 0;
     Navigator.pop(context);
   }
 
