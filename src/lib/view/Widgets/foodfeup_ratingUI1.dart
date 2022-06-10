@@ -12,7 +12,8 @@ import '../../controller/local_storage/app_shared_preferences.dart';
 
 class FoodFeupRating1 extends StatefulWidget{
   final String restaurant, mealname;
-  const FoodFeupRating1({Key key, @required this.restaurant, @required this.mealname}) : super(key: key);
+  final List<List<String>> comms;
+  const FoodFeupRating1({Key key, @required this.restaurant, @required this.mealname, @required this.comms}) : super(key: key);
 
   @override
   FoodFeupRating1State createState() => FoodFeupRating1State();
@@ -31,12 +32,11 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   String username;
   String comment = "";
 
-  Future<List<Widget>> l;
+  List<List<String>> comments;
 
   @override
   void initState() {
     super.initState();
-    l = getWidgets(context);
   }
 
   
@@ -45,53 +45,21 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   Widget build(BuildContext context) {
     rest = widget.restaurant;
     meal = widget.mealname;
+    comments = widget.comms;
     rate = 0;
     return Scaffold(
         body: Center(
-          child: FutureBuilder(
-            future: l,
-            builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
-              List<Widget> children;
-              if (snapshot.hasData) {
-                children = snapshot.data;
-              } else if (snapshot.hasError) {
-                children = <Widget>[
-                  const Icon(
-                    Icons.error_outline,
-                    color: Color.fromRGBO(117, 23, 30, 1),
-                    size: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Text('Error: ${snapshot.error}'),
-                  )
-                ];
-              } else {
-                children = <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/3 ),
-                    child: SizedBox(
-                      width: 60,
-                      height: 60,
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Awaiting result...'),
-                  )
-                ];
-              }
-              return ListView(
-                children: children,
-              );
-            },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: ListView(
+              children: getWidgets(context),
+            ),
           )
         )
     );
   }
 
-  Future<List<Widget>> getWidgets(BuildContext context) async {
+  List<Widget> getWidgets(BuildContext context) {
     final List<Widget> widgets = [];
 
     widgets.add(
@@ -127,32 +95,10 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
     widgets.add(
         Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8)));
 
-    final gsheets = GSheets(Constants.credentials);
-    final ss = await gsheets.spreadsheet(Constants.spreadsheetId);
-    Worksheet sheet = ss.worksheetByTitle("Sheet2");
-
-    List<String> col = await sheet.values.column(2);
-    for(int i = 0; i < col.length; i++)
-    {
-
-      if (col[i] == meal)
-      {
-        List<String> row = await sheet.values.row(i+1);
-        int index = 0;
-        for(String s in row) {
-          if(index < 4 ) {
-            index = index + 1;
-            continue;
-          }
-          List<String> comm = s.split('&');
-          if(comm[2] != "") {
-            widgets.add(generateCommentField(context, comm[2], comm[1]));
-          }
-          index = index + 1;
-        }
-
-      }
+    for(List<String> l in comments) {
+      widgets.add(generateCommentField(context, l[2], l[1]));
     }
+
 
     return widgets;
   }
