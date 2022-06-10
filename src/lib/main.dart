@@ -15,6 +15,7 @@ import 'package:uni/view/Pages/about_page_view.dart';
 import 'package:uni/view/Pages/bug_report_page_view.dart';
 import 'package:uni/view/Pages/bus_stop_next_arrivals_page.dart';
 import 'package:uni/view/Pages/exams_page_view.dart';
+import 'package:uni/view/Pages/foodfeup_main_menu_view.dart';
 import 'package:uni/view/Pages/home_page_view.dart';
 import 'package:uni/view/Pages/logout_route.dart';
 import 'package:uni/view/Pages/splash_page_view.dart';
@@ -23,6 +24,7 @@ import 'package:uni/view/navigation_service.dart';
 import 'package:uni/view/theme.dart';
 
 import 'controller/on_start_up.dart';
+import 'model/food_feup_establishment_page_model.dart';
 import 'model/schedule_page_model.dart';
 
 /// Stores the state of the app
@@ -106,7 +108,7 @@ class MyAppState extends State<MyApp> {
                 return LogoutRoute.buildLogoutRoute();
               case '/' + Constants.navFoodFeup:
                   return PageTransition.makePageTransition(
-                      page: BugReportPageView(),
+                      page: FoodFeupMainMenuPageView(),
                       settings: settings,
                       maintainState: false);
             }

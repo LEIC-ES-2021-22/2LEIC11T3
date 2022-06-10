@@ -55,8 +55,8 @@ class BugReportFormState extends State<BugReportForm> {
   void loadBugClassList() {
     bugList = [];
 
-    bugDescriptions.forEach((int key, Tuple2<String, String> tup) =>
-        {bugList.add(DropdownMenuItem(child: Text(tup.item1), value: key))});
+    bugDescriptions.forEach((int keyint, Tuple2<String, String> tup) =>
+      {bugList.add(DropdownMenuItem(child: Text(tup.item1), value: keyint, key: Key('key_bug_type_op_$keyint')  ))}); //Gherkin Key
   }
 
   @override
@@ -174,6 +174,7 @@ class BugReportFormState extends State<BugReportForm> {
             Expanded(
                 child: DropdownButton(
               hint: Text('Tipo de ocorrência'),
+              key: const Key('key_bug_type') ,//Gherkin key
               items: bugList,
               value: _selectedBug,
               onChanged: (value) {
@@ -202,6 +203,7 @@ class BugReportFormState extends State<BugReportForm> {
               style: Theme.of(context).textTheme.bodyText2,
               textAlign: TextAlign.left),
           value: _isConsentGiven,
+          key: Key ('key_bug_consent'),//Gherkin key
           onChanged: (bool newValue) {
             setState(() {
               _isConsentGiven = newValue;
@@ -216,6 +218,7 @@ class BugReportFormState extends State<BugReportForm> {
   Widget submitButton(BuildContext context) {
     return Container(
         child: ElevatedButton(
+          key: Key ('key_bug_form_submit'),
       onPressed: !_isConsentGiven
           ? null
           : () {
