@@ -20,6 +20,7 @@ class FoodFeupRating1 extends StatefulWidget{
 }
 
 double rate;
+String comment = "";
 
 class FoodFeupRating1State extends State<FoodFeupRating1> {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -30,7 +31,7 @@ class FoodFeupRating1State extends State<FoodFeupRating1> {
   String meal;
 
   String username;
-  String comment = "";
+
 
   List<List<String>> comments;
 
