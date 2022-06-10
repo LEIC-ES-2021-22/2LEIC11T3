@@ -83,12 +83,14 @@ class FoodFeupEstablishmentPageView extends StatelessWidget {
   Widget Function(dynamic daycontent, BuildContext context) dayColumnBuilder(
       int day) {
     Widget createDayColumn(dayContent, BuildContext context) {
-      return Container(
+      return ListView(
+          children: [Container(
           key: Key('establishment-page-day-column-$day'),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: createMealRows(dayContent, context),
-          ));
+          ))]
+      );
     }
 
     return createDayColumn;
