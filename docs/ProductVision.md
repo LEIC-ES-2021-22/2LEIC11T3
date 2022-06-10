@@ -11,13 +11,13 @@ Unlike sigarra, our product offers users the choice to rate and comment on the m
 
 ### Main Features
  - Display this week´s menu at the various establishments @FEUP
- - Pricing info and working hours for each establishment
+ - Working hours for each establishment
  - Publicly visible feedback from users about each plate´s quality
  - Establishment suggestion system based on user feedback
- - Detect feedback abuse from malicious users
 
 ### Assumptions and dependencies
 
 - Menu from sigarra
 - Establishment info from sigarra
+- Google sheets
 - Student number
